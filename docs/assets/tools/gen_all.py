@@ -38,7 +38,7 @@ DOCS = REPO / "docs"
 ASSETS = DOCS / "assets"
 MANIFEST = Path(__file__).parent / "boxes"
 
-GITHUB = "github.com/your-org/thqbot"
+GITHUB = "github.com/thqperseverance/thqbot"
 
 
 # --------------------------------------------------------------------- helpers

@@ -44,7 +44,7 @@
   <text x="269" y="472.55" font-size="13" font-weight="400" fill="#EAEAEF" id="t9">异步总线</text>
   <rect x="344" y="452" width="65" height="32" rx="16" fill="#202027"/>
   <text x="357" y="472.55" font-size="13" font-weight="400" fill="#EAEAEF" id="t10">可观测</text>
-  <text x="80" y="560" font-size="15" font-weight="400" fill="#679EFE" class="mono" id="t11">github.com/your-org/thqbot</text>
+  <text x="80" y="560" font-size="15" font-weight="400" fill="#679EFE" class="mono" id="t11">github.com/thqperseverance/thqbot</text>
   <rect x="790" y="88" width="410" height="464" rx="16" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
   <text x="814" y="126" font-size="13" font-weight="600" fill="#6C6C7A" letter-spacing="2" id="t12">一条消息的旅程</text>
   <rect x="814" y="152" width="362" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>

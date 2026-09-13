@@ -128,7 +128,7 @@
   <text x="806" y="1240.4" font-size="13" font-weight="400" fill="#8A8A98" id="t43">106 网关用例 + 35 前端用例</text>
   <text x="806" y="1260.4" font-size="13" font-weight="400" fill="#8A8A98" id="t44">不依赖数据库与消息队列</text>
   <line x1="88" y1="1356" x2="1112" y2="1356" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
-  <text x="88" y="1402" font-size="16" font-weight="400" fill="#679EFE" class="mono" id="t45">github.com/your-org/thqbot</text>
+  <text x="88" y="1402" font-size="16" font-weight="400" fill="#679EFE" class="mono" id="t45">github.com/thqperseverance/thqbot</text>
   <text x="1112" y="1402" font-size="14" font-weight="400" fill="#8A8A98" text-anchor="end" id="t46">Apache-2.0 · v0.1.0</text>
   <text x="600" y="1478" font-size="26" font-weight="600" fill="#EAEAEF" text-anchor="middle" id="t47">让每一次技能调用都看得见</text>
   <line x1="540" y1="1512" x2="660" y2="1512" stroke="rgba(103,158,254,0.45)" stroke-width="2"/>

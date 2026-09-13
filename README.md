@@ -112,7 +112,7 @@ flowchart LR
 ### 方式一：一条命令起全套（推荐）
 
 ```bash
-git clone https://github.com/your-org/thqbot.git
+git clone https://github.com/thqperseverance/thqbot.git
 cd thqbot
 
 # 1. 配置 LLM（任何 OpenAI 兼容端点都可以）
