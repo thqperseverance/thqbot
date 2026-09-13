@@ -1,0 +1,98 @@
+{
+  "name": "skill.check_compliance",
+  "description": "Check whether a skill directory complies with SKILL_STANDARDS.md and return a PASS/WARN/FAIL report.",
+  "version": "1.0.0",
+  "namespace": "skill",
+  "category": "atomic",
+  "tags": [
+    "skill",
+    "compliance",
+    "audit"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "skill_name": {
+        "type": "string",
+        "description": "Target skill directory name under ithqbot/skills. Optional when bundle_path is provided."
+      },
+      "strict": {
+        "type": "boolean",
+        "description": "If true, treat recommended checks as blocking failures.",
+        "default": false
+      },
+      "bundle_path": {
+        "type": "string",
+        "description": "Path to a packaged skill archive (.zip/.tar/.tar.gz/.tgz/.tar.bz2/.tbz2/.tar.xz/.txz)."
+      }
+    },
+    "required": []
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "report": {
+        "type": "string"
+      },
+      "result_level": {
+        "type": "string"
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "compliance_report",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `compliance_report`."
+      },
+      {
+        "name": "fix_plan",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `fix_plan`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "skill_name",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `skill_name`."
+      },
+      {
+        "name": "bundle_archive",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `bundle_archive`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "check-skill",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "read",
+    "resources": [
+      "skill_workspace"
+    ]
+  },
+  "idempotent": true,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 3000,
+    "availability": "99.5%"
+  },
+  "cost": {
+    "level": "low"
+  },
+  "quality": {
+    "score": 0.93,
+    "source": "manual"
+  }
+}

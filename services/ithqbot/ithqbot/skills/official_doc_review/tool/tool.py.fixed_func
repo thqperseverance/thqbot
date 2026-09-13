@@ -1,0 +1,92 @@
+    def _build_display_text(
+        self,
+        source_name: str,
+        summary: str,
+        problems: list[dict[str, Any]],
+        dimensions: list[str],
+    ) -> tuple[str, bool]:
+        from collections import Counter
+        severity_counts = Counter(str(item.get("severity") or "medium") for item in problems)
+        dimension_counts = Counter(str(item.get("dimension") or "other") for item in problems)
+        severity_parts = []
+        for level, label in (("high", "高"), ("medium", "中"), ("warning", "提示"), ("low", "低")):
+            if severity_counts.get(level):
+                severity_parts.append(f"{label}{severity_counts[level]}项")
+        dimension_parts = [
+            f"{name} {dimension_counts[name]} 项"
+            for name in dimensions
+            if dimension_counts.get(name)
+        ]
+
+        lines = [
+            "## 📋 公文智审报告",
+            "",
+            f"**审查文件：** {source_name}",
+            f"**问题总数：** {len(problems)}",
+            "",
+            "### 📊 问题概览",
+            "",
+        ]
+        if severity_parts:
+            lines.append(f"严重程度：{' | '.join(severity_parts)}")
+        if dimension_parts:
+            lines.append(f"维度分布：{' | '.join(dimension_parts)}")
+
+        lines.extend([
+            "",
+            "### 📝 总体结论",
+            "",
+            summary or "未发现明确问题。",
+        ])
+
+        if not problems:
+            lines.extend(["", "## ✅ 问题明细", "", "未发现需要提示的问题。"])
+            return "\n".join(lines), False
+
+        content_issues = [p for p in problems if self._is_content_issue(p["dimension"])]
+        format_issues = [p for p in problems if not self._is_content_issue(p["dimension"])]
+
+        # 50-row logic: limit display to at most 50 problems in the message
+        total_problems = len(problems)
+        display_limit = 50
+        shown_count = 0
+        exceeded = total_problems > display_limit
+
+        lines.append("")
+        lines.append("## 🔍 问题明细")
+        lines.append("")
+
+        if content_issues:
+            lines.append("### ⚠️ 内容问题")
+            lines.append("")
+            for idx, item in enumerate(content_issues, start=1):
+                if shown_count >= display_limit:
+                    break
+                severity_marker = "**🔴 严重**" if item["severity"] == "high" else ""
+                lines.append(f"**{idx}. {item['dimension']}** {self._severity_badge(item['severity'])} {severity_marker}")
+                lines.append(f"- 📍 位置：{item['location'] or '全文'}")
+                lines.append(f"- ❗ 问题：{item['description']}")
+                lines.append(f"- 💡 建议：{item['suggestion'] or '请结合上下文人工复核并修订。'}")
+                lines.append("")
+                shown_count += 1
+
+        if format_issues and shown_count < display_limit:
+            lines.append("### 📐 格式问题")
+            lines.append("")
+            for idx, item in enumerate(format_issues, start=len(content_issues) + 1):
+                if shown_count >= display_limit:
+                    break
+                severity_marker = "**🔴 严重**" if item["severity"] == "high" else ""
+                lines.append(f"**{idx}. {item['dimension']}** {self._severity_badge(item['severity'])} {severity_marker}")
+                lines.append(f"- 📍 位置：{item['location'] or '全文'}")
+                lines.append(f"- ❗ 问题：{item['description']}")
+                lines.append(f"- 💡 建议：{item['suggestion'] or '请结合上下文人工复核并修订。'}")
+                lines.append("")
+                shown_count += 1
+
+        if exceeded:
+            lines.append("---")
+            lines.append("")
+            lines.append(f"⚠️ 以上为前 {display_limit} 项问题预览，更多审查明细请下载完整报告查看。")
+
+        return "\n".join(lines), exceeded

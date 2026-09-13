@@ -1,0 +1,101 @@
+{
+  "name": "official_doc_review",
+  "description": "Review an uploaded OA/official document, identify format and language issues, and optionally generate a downloadable review report.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "file_id": {
+        "type": "string",
+        "description": "Platform file id for the uploaded document."
+      },
+      "storage_uri": {
+        "type": "string",
+        "description": "Object storage URI of the uploaded document, such as minio://bucket/path or s3://bucket/path."
+      },
+      "rel_path": {
+        "type": "string",
+        "description": "Relative object path under the active default storage bucket."
+      },
+      "file_name": {
+        "type": "string",
+        "description": "Optional filename override when the storage path is ambiguous."
+      },
+      "review_dimensions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "format",
+            "typo",
+            "political",
+            "punctuation",
+            "sequence",
+            "redundancy",
+            "terminology"
+          ]
+        },
+        "description": "Optional subset of review dimensions to execute."
+      },
+      "generate_report": {
+        "type": "boolean",
+        "description": "Whether to save the review result as a markdown report file."
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "problems": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "suggestion": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "files": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "document_review",
+      "issue_list",
+      "downloadable_file"
+    ],
+    "consumes": [
+      "document_file",
+      "minio_object",
+      "s3_object"
+    ]
+  },
+  "version": "1.0.0"
+}

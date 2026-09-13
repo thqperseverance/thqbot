@@ -1,0 +1,123 @@
+{
+  "name": "document.to_markdown",
+  "description": "Submit MinIO files to the configured conversion service, collect markdown results, and return downloadable file descriptors.",
+  "version": "1.0.0",
+  "namespace": "document",
+  "category": "atomic",
+  "tags": [
+    "document",
+    "markdown",
+    "conversion"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "bucket": {
+        "type": "string",
+        "description": "Source MinIO bucket containing the original files."
+      },
+      "object_names": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of object keys to convert."
+      },
+      "save_dir": {
+        "type": "string",
+        "description": "Optional root directory for temporary working files."
+      }
+    },
+    "required": [
+      "bucket",
+      "object_names"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "data": {
+        "type": "object",
+        "properties": {
+          "batch_no": {
+            "type": "string"
+          },
+          "source_bucket": {
+            "type": "string"
+          },
+          "uploaded_count": {
+            "type": "integer"
+          }
+        }
+      },
+      "files": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "markdown_file",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `markdown_file`."
+      },
+      {
+        "name": "downloadable_file",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `downloadable_file`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "minio_object",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `minio_object`."
+      },
+      {
+        "name": "document_file",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `document_file`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "http",
+    "service": "document-convert-service",
+    "endpoint": "/convert/markdown",
+    "method": "POST",
+    "environment": "prod",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "write",
+    "resources": [
+      "object_storage"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 5000,
+    "availability": "99.5%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.84,
+    "source": "manual"
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "document.to_markdown",
+  "plugin": "file_to_markdown",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "document.to_markdown",
+    "description": "Submit MinIO files to the configured conversion service, collect markdown results, and return downloadable file descriptors.",
+    "version": "1.0.0",
+    "namespace": "document",
+    "category": "atomic",
+    "tags": [
+      "document",
+      "markdown",
+      "conversion"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "markdown_file",
+        "downloadable_file"
+      ],
+      "consumes": [
+        "minio_object",
+        "document_file"
+      ]
+    },
+    "routing": {
+      "type": "http",
+      "service": "document-convert-service",
+      "endpoint": "/convert/markdown",
+      "method": "POST",
+      "environment": "prod",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "write",
+      "resources": [
+        "object_storage"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 5000,
+      "availability": "99.5%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.84,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/file_to_markdown/capability.json",
+    "checksum": "sha256:c2f4cead6295620263be9533fc48397676e34134931dcff13cac099843275b1f"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

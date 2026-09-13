@@ -1,0 +1,350 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ithqbot.local/schemas/capability-registry.schema.json",
+  "title": "ithqbot Capability Registry Entry Schema",
+  "description": "Registry schema for capability discovery, status management, and planner-oriented indexing.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "plugin",
+    "version",
+    "status",
+    "capability"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Globally unique capability identifier. Format: <namespace>.<action>.",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)$"
+    },
+    "plugin": {
+      "type": "string",
+      "description": "Runtime plugin that hosts the capability.",
+      "pattern": "^[a-z][a-z0-9_-]*$"
+    },
+    "version": {
+      "type": "string",
+      "description": "Registry record version or capability contract version.",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "status": {
+      "type": "string",
+      "description": "Lifecycle status used by runtime and planner filtering.",
+      "enum": ["active", "deprecated", "disabled"]
+    },
+    "capability": {
+      "$ref": "#/$defs/capability_index"
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "Last update timestamp in RFC 3339 format.",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "tag": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_:-]*$"
+    },
+    "semantic_name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "resource_name": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_:-]*$"
+    },
+    "capability_ref": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)$"
+    },
+    "capability_index": {
+      "type": "object",
+      "description": "Normalized and indexable subset of a capability declaration.",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "description",
+        "version",
+        "namespace",
+        "semantic",
+        "routing"
+      ],
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/capability_ref"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "namespace": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "category": {
+          "type": "string",
+          "enum": ["atomic", "composite", "ai"]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tag"
+          },
+          "uniqueItems": true
+        },
+        "deprecated": {
+          "type": "boolean",
+          "default": false
+        },
+        "semantic": {
+          "$ref": "#/$defs/semantic_index"
+        },
+        "routing": {
+          "$ref": "#/$defs/routing_index"
+        },
+        "dependencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/capability_ref"
+          },
+          "uniqueItems": true
+        },
+        "auth": {
+          "$ref": "#/$defs/auth_index"
+        },
+        "sla": {
+          "$ref": "#/$defs/sla_index"
+        },
+        "cost": {
+          "$ref": "#/$defs/cost_index"
+        },
+        "effects": {
+          "$ref": "#/$defs/effects_index"
+        },
+        "quality": {
+          "$ref": "#/$defs/quality_index"
+        },
+        "idempotent": {
+          "type": "boolean"
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      }
+    },
+    "semantic_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["produces", "consumes"],
+      "properties": {
+        "produces": {
+          "type": "array",
+          "description": "Indexable output semantic names.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semantic_name"
+          },
+          "uniqueItems": true
+        },
+        "consumes": {
+          "type": "array",
+          "description": "Indexable input semantic names.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semantic_name"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "routing_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["http", "mcp", "internal"]
+        },
+        "service": {
+          "type": "string"
+        },
+        "endpoint": {
+          "type": "string"
+        },
+        "method": {
+          "type": "string"
+        },
+        "server": {
+          "type": "string"
+        },
+        "tool": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "auth_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_:-]*$"
+          }
+        }
+      }
+    },
+    "sla_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "availability": {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?%$"
+        }
+      }
+    },
+    "cost_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        }
+      }
+    },
+    "effects_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "resources"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["read", "write", "external"]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/resource_name"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "quality_index": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "source"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "source": {
+          "type": "string",
+          "enum": ["manual", "metrics", "ai_eval"]
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "description": "Pointer to the authoritative capability declaration.",
+      "additionalProperties": false,
+      "required": ["schema_file"],
+      "properties": {
+        "schema_file": {
+          "type": "string",
+          "description": "Relative or absolute path to the capability declaration file."
+        },
+        "checksum": {
+          "type": "string",
+          "description": "Optional content hash used for synchronization and drift detection."
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "name": "billing.get_bill",
+      "plugin": "billing-plugin",
+      "version": "1.0.0",
+      "status": "active",
+      "capability": {
+        "name": "billing.get_bill",
+        "description": "获取用户账单信息",
+        "version": "1.0.0",
+        "namespace": "billing",
+        "category": "atomic",
+        "tags": ["billing", "finance"],
+        "deprecated": false,
+        "semantic": {
+          "produces": ["billing_data"],
+          "consumes": ["user_id"]
+        },
+        "routing": {
+          "type": "http",
+          "service": "billing-service",
+          "endpoint": "/get_bill",
+          "method": "POST",
+          "environment": "prod",
+          "timeout_ms": 3000
+        },
+        "auth": {
+          "required": true,
+          "roles": ["user", "admin"]
+        },
+        "sla": {
+          "latency_ms": 200,
+          "availability": "99.9%"
+        },
+        "cost": {
+          "level": "low"
+        },
+        "effects": {
+          "type": "read",
+          "resources": ["billing_db"]
+        },
+        "quality": {
+          "score": 0.9,
+          "source": "manual"
+        },
+        "idempotent": true,
+        "retryable": true
+      },
+      "source": {
+        "schema_file": "registries/capability-registry/billing.get_bill.json",
+        "checksum": "sha256:example"
+      },
+      "updated_at": "2026-04-25T00:00:00Z"
+    }
+  ]
+}

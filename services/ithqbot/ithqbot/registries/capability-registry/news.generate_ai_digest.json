@@ -1,0 +1,59 @@
+{
+  "name": "news.generate_ai_digest",
+  "plugin": "ai_new_day_report",
+  "version": "1.0.0",
+  "status": "disabled",
+  "capability": {
+    "name": "news.generate_ai_digest",
+    "description": "Fetch daily AI news and weekly hot rankings from Aibase, then generate a structured markdown digest.",
+    "version": "1.0.0",
+    "namespace": "news",
+    "category": "atomic",
+    "tags": [
+      "news",
+      "report",
+      "aibase"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "news_report",
+        "weekly_ranking"
+      ],
+      "consumes": [
+        "report_scope",
+        "webhook_config"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "ai-news-report",
+      "timeout_ms": 15000
+    },
+    "effects": {
+      "type": "external",
+      "resources": [
+        "aibase",
+        "wecom_webhook"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 15000,
+      "availability": "98.0%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.72,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/ai_new_day_report/capability.json",
+    "checksum": "sha256:acd2d1e098a3b6a7e944d2e2251e4f94f7fa81caf5ecb92b374327241221f46b"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

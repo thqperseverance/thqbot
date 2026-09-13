@@ -1,0 +1,70 @@
+{
+  "name": "file_to_markdown",
+  "description": "Submit MinIO files to the configured conversion service, collect markdown results, and return downloadable file descriptors.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "bucket": {
+        "type": "string",
+        "description": "Source MinIO bucket containing the original files."
+      },
+      "object_names": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of object keys to convert."
+      },
+      "save_dir": {
+        "type": "string",
+        "description": "Optional root directory for temporary working files."
+      }
+    },
+    "required": [
+      "bucket",
+      "object_names"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "data": {
+        "type": "object",
+        "properties": {
+          "batch_no": {
+            "type": "string"
+          },
+          "source_bucket": {
+            "type": "string"
+          },
+          "uploaded_count": {
+            "type": "integer"
+          }
+        }
+      },
+      "files": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "markdown_file",
+      "downloadable_file"
+    ],
+    "consumes": [
+      "minio_object",
+      "document_file"
+    ]
+  },
+  "version": "1.0.0"
+}

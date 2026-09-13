@@ -1,0 +1,58 @@
+{
+  "name": "testing.plan_cases",
+  "plugin": "test_planner",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "testing.plan_cases",
+    "description": "Generate test cases through test-eval.",
+    "version": "1.0.0",
+    "namespace": "testing",
+    "category": "ai",
+    "tags": [
+      "testing",
+      "planning",
+      "test_eval"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "test_plan",
+        "test_cases"
+      ],
+      "consumes": [
+        "test_objective",
+        "test_target"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "test-planner",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "external",
+      "resources": [
+        "test_eval_service"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 6000,
+      "availability": "99.0%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.81,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/test_planner/capability.json",
+    "checksum": "sha256:c631588836cd6923891b39a69b7a0e663a983aa29bbc4e24c8b332fa783d13e5"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

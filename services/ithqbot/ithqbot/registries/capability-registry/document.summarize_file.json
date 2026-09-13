@@ -1,0 +1,57 @@
+{
+  "name": "document.summarize_file",
+  "plugin": "file_summary_skill",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "document.summarize_file",
+    "description": "Read a file by file_id, summarize it with LLM, then save summary as a new file and return new file_id.",
+    "version": "1.0.0",
+    "namespace": "document",
+    "category": "ai",
+    "tags": [
+      "document",
+      "summary",
+      "file"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "document_summary",
+        "saved_file"
+      ],
+      "consumes": [
+        "document_file"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "file-summary",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "write",
+      "resources": [
+        "object_storage"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 8000,
+      "availability": "99.0%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.82,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/file_summary_skill/capability.json",
+    "checksum": "sha256:7c778d6484e244a17afdbdb69e390c5ab23fefd10bf6e7b8d84358c75925cc95"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

@@ -1,0 +1,58 @@
+{
+  "name": "testing.analyze_failures",
+  "plugin": "eval_analyzer",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "testing.analyze_failures",
+    "description": "Analyze failed test cases through test-eval.",
+    "version": "1.0.0",
+    "namespace": "testing",
+    "category": "ai",
+    "tags": [
+      "testing",
+      "analysis",
+      "test_eval"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "failure_analysis",
+        "improvement_suggestions"
+      ],
+      "consumes": [
+        "failed_cases",
+        "evaluation_criteria"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "eval-analyzer",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "external",
+      "resources": [
+        "test_eval_service"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 6000,
+      "availability": "99.0%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.83,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/eval_analyzer/capability.json",
+    "checksum": "sha256:66f1faaf8ae4cbb6612e91bd0e61df38b58911e76b375cbf260f3c10df9d927d"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

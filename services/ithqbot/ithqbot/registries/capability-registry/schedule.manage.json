@@ -1,0 +1,58 @@
+{
+  "name": "schedule.manage",
+  "plugin": "cron",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "schedule.manage",
+    "description": "Create, list, and remove reminders or recurring tasks with interval, cron expression, one-time schedule, and timezone support.",
+    "version": "1.0.0",
+    "namespace": "schedule",
+    "category": "atomic",
+    "tags": [
+      "schedule",
+      "reminder",
+      "cron"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "scheduled_job",
+        "job_list"
+      ],
+      "consumes": [
+        "schedule_request",
+        "job_reference"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "cron",
+      "timeout_ms": 3000
+    },
+    "effects": {
+      "type": "write",
+      "resources": [
+        "scheduler_store"
+      ]
+    },
+    "idempotent": false,
+    "retryable": false,
+    "sla": {
+      "latency_ms": 1000,
+      "availability": "99.9%"
+    },
+    "cost": {
+      "level": "low"
+    },
+    "quality": {
+      "score": 0.95,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/cron/capability.json",
+    "checksum": "sha256:830142ff1b660cbbffef616bea47793daa4140c51521ba00fc9325ed46f981f6"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

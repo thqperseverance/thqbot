@@ -1,0 +1,58 @@
+{
+  "name": "document.compare",
+  "plugin": "doc_compare",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "document.compare",
+    "description": "Compare two documents from local paths or MinIO, summarize differences in Chinese, and optionally export a downloadable report.",
+    "version": "1.0.0",
+    "namespace": "document",
+    "category": "ai",
+    "tags": [
+      "document",
+      "comparison",
+      "report"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "comparison_summary",
+        "downloadable_file"
+      ],
+      "consumes": [
+        "document_file",
+        "minio_object"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "doc-compare",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "write",
+      "resources": [
+        "object_storage"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 8000,
+      "availability": "99.0%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.86,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/doc_compare/capability.json",
+    "checksum": "sha256:48679dbdb21e82d79aa0e8007fdb36aa9200e1a7d49f6b52a6966c3a3c1b3244"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

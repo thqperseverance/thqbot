@@ -1,0 +1,49 @@
+# ---------------------------------------------------------------- Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# ---------------------------------------------------------------- Node
+node_modules/
+web/dist/
+npm-debug.log*
+yarn-error.log*
+.pnpm-store/
+
+# ------------------------------------------------- 本地配置与密钥（绝不入库）
+.env
+.env.local
+.env.*.local
+# 由 config.template.json 渲染生成，含绝对路径与连接串
+services/ithqbot/config.json
+services/ithqbot/config-copy.json
+services/ithqbot/config-ops/
+
+# ---------------------------------------------------------------- 运行时数据
+# agent 的会话 / 记忆工作区（保留 workspace/docs 与 README）
+services/ithqbot/workspace/shared/
+services/ithqbot/workspace/sessions/
+services/ithqbot/workspace/memory/
+services/ithqbot/workspace/*.db
+*.log
+
+# ---------------------------------------------------------------- 编辑器 / 系统
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------- 刻意入库的产物
+# services/gateway/web/  前端构建产物随仓库提供，docker compose 才能开箱即用。
+#                        前端改动后请执行：cd web && npm run build

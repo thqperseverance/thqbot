@@ -1,0 +1,115 @@
+{
+  "name": "testing.compare_models",
+  "description": "Compare outputs from multiple providers through test-eval.",
+  "version": "1.0.0",
+  "namespace": "testing",
+  "category": "ai",
+  "tags": [
+    "testing",
+    "comparison",
+    "models"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "prompt": {
+        "type": "string"
+      },
+      "providers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "criteria": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt",
+      "providers"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "comparison": {
+        "type": "string"
+      },
+      "provider_results": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "model_comparison",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `model_comparison`."
+      },
+      {
+        "name": "evaluation_summary",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `evaluation_summary`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "prompt_text",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `prompt_text`."
+      },
+      {
+        "name": "model_provider_list",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `model_provider_list`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "model-compare",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "external",
+    "resources": [
+      "test_eval_service"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 9000,
+    "availability": "99.0%"
+  },
+  "cost": {
+    "level": "high"
+  },
+  "quality": {
+    "score": 0.82,
+    "source": "manual"
+  }
+}

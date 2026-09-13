@@ -1,0 +1,86 @@
+{
+  "bot": {
+    "id": "bot_A",
+    "name": "thqbot 助手",
+    "description": "你是 thqbot 平台的通用智能助手；产品名始终是 thqbot，运行时组件名是 ithqbot，工作区绝对路径里出现的旧目录名不代表产品名。需要时先说明意图，再调用工具，并直接采用工具返回的结果作为答案；绝对不要用相同参数重复调用同一个工具，也不要编造工具执行失败。回答简洁、直接、使用中文。示例文档位于 ${ITHQBOT_WORKSPACE}/docs（例如 ${ITHQBOT_WORKSPACE}/docs/spec-v1.md 与 spec-v2.md），需要比较文档时请直接使用这些绝对路径。"
+  },
+  "agents": {
+    "defaults": {
+      "workspace": "${ITHQBOT_WORKSPACE}",
+      "model": "${APP_LLM_MODEL}",
+      "provider": "custom",
+      "maxTokens": 4096,
+      "contextWindowTokens": 32768,
+      "temperature": 0.2,
+      "maxToolIterations": 20,
+      "maxToolConcurrency": 5,
+      "sessionStoreUri": "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}",
+      "memoryStoreUri": "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}",
+      "cronStoreUri": "postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:5432/${POSTGRES_DB}",
+      "requireExternalSessionStore": true,
+      "requireExternalMemoryStore": true,
+      "requireExternalCronStore": true
+    },
+    "routing": {
+      "enabled": false
+    }
+  },
+  "infrastructure": {
+    "kafka": {
+      "servers": "${KAFKA_SERVERS}",
+      "security_protocol": "",
+      "sasl_mechanism": "PLAIN",
+      "username": "",
+      "password": "",
+      "inbound_topic": "${KAFKA_INBOUND_TOPIC}",
+      "outbound_topic": "${KAFKA_OUTBOUND_TOPIC}"
+    },
+    "redis": {
+      "uri": "redis://${REDIS_HOST}:6379/1"
+    }
+  },
+  "channels": {
+    "sendProgress": true,
+    "sendToolHints": true,
+    "icatmsg": {
+      "enabled": true,
+      "session_scope": "account_chat",
+      "sharedWorkspaceRoot": "${ITHQBOT_SHARED_WORKSPACE}",
+      "allow_from": ["*"]
+    }
+  },
+  "providers": {
+    "custom": {
+      "apiKey": "${APP_LLM_API_KEY}",
+      "apiBase": "${APP_LLM_BASE_URL}"
+    }
+  },
+  "gateway": {
+    "host": "0.0.0.0",
+    "port": 18790
+  },
+  "tools": {
+    "enabled": ["*"],
+    "disabled": [],
+    "restrictToWorkspace": true,
+    "web": {
+      "proxy": "${HTTP_PROXY}",
+      "search": {
+        "provider": "duckduckgo",
+        "maxResults": 5
+      }
+    },
+    "minio": {
+      "backend": "minio",
+      "endpoint": "${MINIO_ENDPOINT}",
+      "access_key": "${MINIO_ACCESS_KEY}",
+      "secret_key": "${MINIO_SECRET_KEY}",
+      "bucket": "${MINIO_BUCKET}",
+      "secure": false
+    },
+    "mcpServers": {}
+  },
+  "skills": {
+    "enabledSkills": ["*"]
+  }
+}

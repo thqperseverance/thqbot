@@ -1,0 +1,65 @@
+{
+  "name": "retrieve_knowledge",
+  "description": "Retrieve relevant passages from the configured knowledge base and return a grounded Chinese answer.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "The user's question or retrieval query."
+      },
+      "domain": {
+        "type": "string",
+        "description": "Optional knowledge-base name or domain override."
+      }
+    },
+    "required": [
+      "query"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "data": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "hit_count": {
+            "type": "integer"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "passages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "knowledge_answer",
+      "knowledge_hits"
+    ],
+    "consumes": [
+      "user_query",
+      "knowledge_domain"
+    ]
+  },
+  "version": "1.0.0"
+}

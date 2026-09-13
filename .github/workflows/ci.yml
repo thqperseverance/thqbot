@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  gateway:
+    name: gateway tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: services/gateway/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r services/gateway/requirements.txt
+
+      # Isolated by design: temporary SQLite + in-memory Redis / object-store fakes,
+      # so no PostgreSQL, Kafka or MinIO service container is required.
+      - name: Run tests
+        working-directory: services/gateway
+        run: python -m pytest -q
+
+  frontend:
+    name: frontend tests + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install dependencies
+        working-directory: web
+        run: npm ci
+
+      # Markdown parser cases + real component SSR rendering: no browser needed.
+      - name: Run tests
+        working-directory: web
+        run: npm test
+
+      # tsc --noEmit + vite build. Output goes to services/gateway/web, which is
+      # committed so that `docker compose up --build` works without Node.
+      - name: Type-check and build
+        working-directory: web
+        run: npm run build
+
+      - name: Fail if the committed build output is stale
+        run: |
+          if [ -n "$(git status --porcelain services/gateway/web)" ]; then
+            echo "::error::services/gateway/web is out of date. Run 'cd web && npm run build' and commit the result."
+            git status --porcelain services/gateway/web
+            exit 1
+          fi

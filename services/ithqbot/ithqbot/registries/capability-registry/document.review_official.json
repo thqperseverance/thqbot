@@ -1,0 +1,60 @@
+{
+  "name": "document.review_official",
+  "plugin": "official_doc_review",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "document.review_official",
+    "description": "Review an uploaded OA/official document, identify format and language issues, and optionally generate a downloadable review report.",
+    "version": "1.0.0",
+    "namespace": "document",
+    "category": "ai",
+    "tags": [
+      "document",
+      "review",
+      "official_document"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "document_review",
+        "issue_list",
+        "downloadable_file"
+      ],
+      "consumes": [
+        "document_file",
+        "minio_object",
+        "s3_object"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "official-doc-review",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "write",
+      "resources": [
+        "object_storage"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 7000,
+      "availability": "99.0%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.87,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/official_doc_review/capability.json",
+    "checksum": "sha256:95bd2bef9861f7147ddf66ceb4c77fcf0c7a50a662ca6460cc2a47257e048d63"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

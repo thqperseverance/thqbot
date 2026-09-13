@@ -1,0 +1,47 @@
+{
+  "name": "text_stats",
+  "description": "统计文本的字符数、行数、段落数、中英文词数与高频关键词。",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "text": {
+        "type": "string",
+        "description": "待统计的文本内容。"
+      },
+      "top_n": {
+        "type": "integer",
+        "description": "返回的高频关键词个数，默认 5。",
+        "default": 5,
+        "minimum": 1,
+        "maximum": 50
+      }
+    },
+    "required": ["text"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {"type": "string"},
+      "message": {"type": "string"},
+      "data": {
+        "type": "object",
+        "properties": {
+          "chars_total": {"type": "integer"},
+          "chars_no_space": {"type": "integer"},
+          "lines": {"type": "integer"},
+          "paragraphs": {"type": "integer"},
+          "words_cjk": {"type": "integer"},
+          "words_latin": {"type": "integer"},
+          "words_total": {"type": "integer"},
+          "reading_seconds": {"type": "integer"},
+          "keywords": {"type": "array", "items": {"type": "object"}}
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": ["text_statistics", "keyword_list"],
+    "consumes": ["plain_text"]
+  },
+  "version": "1.0.0"
+}

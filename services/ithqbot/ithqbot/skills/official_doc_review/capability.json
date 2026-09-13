@@ -1,0 +1,160 @@
+{
+  "name": "document.review_official",
+  "description": "Review an uploaded OA/official document, identify format and language issues, and optionally generate a downloadable review report.",
+  "version": "1.0.0",
+  "namespace": "document",
+  "category": "ai",
+  "tags": [
+    "document",
+    "review",
+    "official_document"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "file_id": {
+        "type": "string",
+        "description": "Platform file id for the uploaded document."
+      },
+      "storage_uri": {
+        "type": "string",
+        "description": "Object storage URI of the uploaded document, such as minio://bucket/path or s3://bucket/path."
+      },
+      "rel_path": {
+        "type": "string",
+        "description": "Relative object path under the active default storage bucket."
+      },
+      "file_name": {
+        "type": "string",
+        "description": "Optional filename override when the storage path is ambiguous."
+      },
+      "review_dimensions": {
+        "type": "array",
+        "items": {
+          "type": "string",
+          "enum": [
+            "format",
+            "typo",
+            "political",
+            "punctuation",
+            "sequence",
+            "redundancy",
+            "terminology"
+          ]
+        },
+        "description": "Optional subset of review dimensions to execute."
+      },
+      "generate_report": {
+        "type": "boolean",
+        "description": "Whether to save the review result as a markdown report file."
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "problems": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "dimension": {
+              "type": "string"
+            },
+            "severity": {
+              "type": "string"
+            },
+            "location": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "suggestion": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "files": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "document_review",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `document_review`."
+      },
+      {
+        "name": "issue_list",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `issue_list`."
+      },
+      {
+        "name": "downloadable_file",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `downloadable_file`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "document_file",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `document_file`."
+      },
+      {
+        "name": "minio_object",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `minio_object`."
+      },
+      {
+        "name": "s3_object",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `s3_object`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "official-doc-review",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "write",
+    "resources": [
+      "object_storage"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 7000,
+    "availability": "99.0%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.87,
+    "source": "manual"
+  }
+}

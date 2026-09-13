@@ -1,0 +1,51 @@
+{
+  "name": "file_summary_skill",
+  "description": "Read a file by file_id, summarize it with LLM, then save summary as a new file and return new file_id.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "file_id": {
+        "type": "string",
+        "description": "Source file id to summarize."
+      },
+      "output_name": {
+        "type": "string",
+        "description": "Optional output filename."
+      },
+      "output_mime": {
+        "type": "string",
+        "description": "Optional output mime type."
+      }
+    },
+    "required": [
+      "file_id"
+    ]
+  },
+  "version": "1.0.0",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "file_id": {
+        "type": "string"
+      },
+      "file_name": {
+        "type": "string"
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "document_summary",
+      "saved_file"
+    ],
+    "consumes": [
+      "document_file"
+    ]
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "name": "content.summarize",
+  "description": "Summarize a URL, local file, or YouTube video using the summarize CLI.",
+  "version": "1.0.0",
+  "namespace": "content",
+  "category": "ai",
+  "tags": [
+    "content",
+    "summary",
+    "web"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "The URL, file path, or YouTube link to summarize."
+      },
+      "length": {
+        "type": "string",
+        "enum": [
+          "short",
+          "medium",
+          "long",
+          "xl",
+          "xxl"
+        ],
+        "default": "medium",
+        "description": "Desired length of the summary."
+      },
+      "extract_only": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, only extract the content without summarizing."
+      },
+      "youtube": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "off",
+          "always"
+        ],
+        "default": "auto",
+        "description": "YouTube extraction strategy."
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "extracted_content": {
+        "type": "string"
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "summary_text",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `summary_text`."
+      },
+      {
+        "name": "extracted_content",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `extracted_content`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "summary_target",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `summary_target`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "summarize-cli",
+    "timeout_ms": 180000
+  },
+  "effects": {
+    "type": "external",
+    "resources": [
+      "remote_content"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 15000,
+    "availability": "98.0%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.8,
+    "source": "manual"
+  }
+}

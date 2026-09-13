@@ -1,0 +1,74 @@
+{
+  "name": "test_runner",
+  "description": "Run one dataset or a suite of datasets through test-orchestrator.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "enum": [
+          "run_dataset",
+          "run_suite"
+        ]
+      },
+      "dataset_id": {
+        "type": "string"
+      },
+      "dataset_ids": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "steps": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ]
+  },
+  "version": "1.0.0",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "run_id": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "results": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "test_run_result",
+      "evaluation_report"
+    ],
+    "consumes": [
+      "run_action",
+      "dataset_reference"
+    ]
+  }
+}

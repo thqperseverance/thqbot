@@ -1,0 +1,106 @@
+{
+  "name": "summarize",
+  "description": "Summarize a URL, local file, or YouTube video using the summarize CLI.",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "The URL, file path, or YouTube link to summarize."
+      },
+      "length": {
+        "type": "string",
+        "enum": [
+          "short",
+          "medium",
+          "long",
+          "xl",
+          "xxl"
+        ],
+        "default": "medium",
+        "description": "Desired length of the summary."
+      },
+      "extract_only": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, only extract the content without summarizing."
+      },
+      "youtube": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "off",
+          "always"
+        ],
+        "default": "auto",
+        "description": "YouTube extraction strategy."
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "version": "1.0.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "target": {
+        "type": "string",
+        "description": "The URL, file path, or YouTube link to summarize."
+      },
+      "length": {
+        "type": "string",
+        "enum": [
+          "short",
+          "medium",
+          "long",
+          "xl",
+          "xxl"
+        ],
+        "default": "medium",
+        "description": "Desired length of the summary."
+      },
+      "extract_only": {
+        "type": "boolean",
+        "default": false,
+        "description": "If true, only extract the content without summarizing."
+      },
+      "youtube": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "off",
+          "always"
+        ],
+        "default": "auto",
+        "description": "YouTube extraction strategy."
+      }
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "extracted_content": {
+        "type": "string"
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "summary_text",
+      "extracted_content"
+    ],
+    "consumes": [
+      "summary_target"
+    ]
+  }
+}

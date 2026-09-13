@@ -1,0 +1,114 @@
+{
+  "name": "news.generate_ai_digest",
+  "description": "Fetch daily AI news and weekly hot rankings from Aibase, then generate a structured markdown digest.",
+  "version": "1.0.0",
+  "namespace": "news",
+  "category": "atomic",
+  "tags": [
+    "news",
+    "report",
+    "aibase"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "report_scope": {
+        "type": "string",
+        "enum": [
+          "daily",
+          "weekly",
+          "full"
+        ],
+        "default": "full",
+        "description": "Select whether to return daily news, weekly ranking, or both."
+      },
+      "push_to_wecom": {
+        "type": "boolean",
+        "default": false,
+        "description": "Whether to push the generated report to a configured WeCom webhook."
+      },
+      "webhook_env_var": {
+        "type": "string",
+        "default": "WECOM_WEBHOOK_URL",
+        "description": "Environment variable name that stores the WeCom webhook URL."
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "report_markdown": {
+        "type": "string"
+      },
+      "daily_news": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "weekly_hot": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "news_report",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `news_report`."
+      },
+      {
+        "name": "weekly_ranking",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `weekly_ranking`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "report_scope",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `report_scope`."
+      },
+      {
+        "name": "webhook_config",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `webhook_config`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "ai-news-report",
+    "timeout_ms": 15000
+  },
+  "effects": {
+    "type": "external",
+    "resources": [
+      "aibase",
+      "wecom_webhook"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 15000,
+    "availability": "98.0%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.72,
+    "source": "manual"
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "name": "testing.analyze_failures",
+  "description": "Analyze failed test cases through test-eval.",
+  "version": "1.0.0",
+  "namespace": "testing",
+  "category": "ai",
+  "tags": [
+    "testing",
+    "analysis",
+    "test_eval"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "failed_cases": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "criteria": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "failed_cases"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "analysis": {
+        "type": "string"
+      },
+      "recommendations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "failure_analysis",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `failure_analysis`."
+      },
+      {
+        "name": "improvement_suggestions",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `improvement_suggestions`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "failed_cases",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `failed_cases`."
+      },
+      {
+        "name": "evaluation_criteria",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `evaluation_criteria`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "eval-analyzer",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "external",
+    "resources": [
+      "test_eval_service"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 6000,
+    "availability": "99.0%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.83,
+    "source": "manual"
+  }
+}

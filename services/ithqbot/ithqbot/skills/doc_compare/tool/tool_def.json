@@ -1,0 +1,26 @@
+{
+  "name": "doc_compare",
+  "description": "Compare two documents from local paths or MinIO, summarize differences in Chinese, and optionally export a downloadable report.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "path1": {
+        "type": "string",
+        "description": "Path to the first document. Supports local path, relative path, or minio://bucket/path."
+      },
+      "path2": {
+        "type": "string",
+        "description": "Path to the second document. Supports local path, relative path, or minio://bucket/path."
+      },
+      "download": {
+        "type": "boolean",
+        "description": "Whether to export the comparison result as a downloadable file."
+      },
+      "otp_code": {
+        "type": "string",
+        "description": "OTP code required when download=true."
+      }
+    },
+    "required": ["path1", "path2"]
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "name": "testing.compare_models",
+  "plugin": "model_compare",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "testing.compare_models",
+    "description": "Compare outputs from multiple providers through test-eval.",
+    "version": "1.0.0",
+    "namespace": "testing",
+    "category": "ai",
+    "tags": [
+      "testing",
+      "comparison",
+      "models"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "model_comparison",
+        "evaluation_summary"
+      ],
+      "consumes": [
+        "prompt_text",
+        "model_provider_list"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "model-compare",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "external",
+      "resources": [
+        "test_eval_service"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 9000,
+      "availability": "99.0%"
+    },
+    "cost": {
+      "level": "high"
+    },
+    "quality": {
+      "score": 0.82,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/model_compare/capability.json",
+    "checksum": "sha256:b508f825dfe6e0bc88640ca160ac9c2080941469a6cbdc55a5e4d367a6b5fc7a"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

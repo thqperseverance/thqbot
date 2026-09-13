@@ -1,0 +1,63 @@
+{
+  "name": "ai_new_day_report",
+  "description": "Fetch daily AI news and weekly hot rankings from Aibase, then generate a structured markdown digest.",
+  "version": "1.0.0",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "report_scope": {
+        "type": "string",
+        "enum": [
+          "daily",
+          "weekly",
+          "full"
+        ],
+        "default": "full",
+        "description": "Select whether to return daily news, weekly ranking, or both."
+      },
+      "push_to_wecom": {
+        "type": "boolean",
+        "default": false,
+        "description": "Whether to push the generated report to a configured WeCom webhook."
+      },
+      "webhook_env_var": {
+        "type": "string",
+        "default": "WECOM_WEBHOOK_URL",
+        "description": "Environment variable name that stores the WeCom webhook URL."
+      }
+    }
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "report_markdown": {
+        "type": "string"
+      },
+      "daily_news": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "weekly_hot": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "news_report",
+      "weekly_ranking"
+    ],
+    "consumes": [
+      "report_scope",
+      "webhook_config"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "name": "eval_analyzer",
+  "description": "Analyze failed test cases through test-eval.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "failed_cases": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "criteria": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "failed_cases"
+    ]
+  },
+  "version": "1.0.0",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "analysis": {
+        "type": "string"
+      },
+      "recommendations": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "failure_analysis",
+      "improvement_suggestions"
+    ],
+    "consumes": [
+      "failed_cases",
+      "evaluation_criteria"
+    ]
+  }
+}

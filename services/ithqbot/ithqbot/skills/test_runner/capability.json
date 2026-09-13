@@ -1,0 +1,124 @@
+{
+  "name": "testing.run",
+  "description": "Run one dataset or a suite of datasets through test-orchestrator.",
+  "version": "1.0.0",
+  "namespace": "testing",
+  "category": "atomic",
+  "tags": [
+    "testing",
+    "execution",
+    "datasets"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "enum": [
+          "run_dataset",
+          "run_suite"
+        ]
+      },
+      "dataset_id": {
+        "type": "string"
+      },
+      "dataset_ids": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "steps": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "action"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "run_id": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "results": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "test_run_result",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `test_run_result`."
+      },
+      {
+        "name": "evaluation_report",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `evaluation_report`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "run_action",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `run_action`."
+      },
+      {
+        "name": "dataset_reference",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `dataset_reference`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "test-runner",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "external",
+    "resources": [
+      "test_orchestrator_service"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 4000,
+    "availability": "99.5%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.9,
+    "source": "manual"
+  }
+}

@@ -1,0 +1,116 @@
+{
+  "name": "document.compare",
+  "description": "Compare two documents from local paths or MinIO, summarize differences in Chinese, and optionally export a downloadable report.",
+  "version": "1.0.0",
+  "namespace": "document",
+  "category": "ai",
+  "tags": [
+    "document",
+    "comparison",
+    "report"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "path1": {
+        "type": "string",
+        "description": "Path to the first document. Supports local path, relative path, or minio://bucket/path."
+      },
+      "path2": {
+        "type": "string",
+        "description": "Path to the second document. Supports local path, relative path, or minio://bucket/path."
+      },
+      "download": {
+        "type": "boolean",
+        "description": "Whether to export the comparison result as a downloadable file."
+      },
+      "otp_code": {
+        "type": "string",
+        "description": "OTP code required when download=true."
+      }
+    },
+    "required": [
+      "path1",
+      "path2"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "_ithqbot_event": {
+        "type": "string"
+      },
+      "llm_result": {
+        "type": "string"
+      },
+      "interaction_message": {
+        "type": "string"
+      },
+      "interaction": {
+        "type": "object"
+      },
+      "file_message": {
+        "type": "string"
+      },
+      "files": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "comparison_summary",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `comparison_summary`."
+      },
+      {
+        "name": "downloadable_file",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `downloadable_file`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "document_file",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `document_file`."
+      },
+      {
+        "name": "minio_object",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `minio_object`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "doc-compare",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "write",
+    "resources": [
+      "object_storage"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 8000,
+    "availability": "99.0%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.86,
+    "source": "manual"
+  }
+}

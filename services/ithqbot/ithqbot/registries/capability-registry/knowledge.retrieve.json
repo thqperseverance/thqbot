@@ -1,0 +1,58 @@
+{
+  "name": "knowledge.retrieve",
+  "plugin": "knowledge_retrieval",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "knowledge.retrieve",
+    "description": "Retrieve relevant passages from the configured knowledge base and return a grounded Chinese answer.",
+    "version": "1.0.0",
+    "namespace": "knowledge",
+    "category": "atomic",
+    "tags": [
+      "knowledge",
+      "retrieval",
+      "rag"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "knowledge_answer",
+        "knowledge_hits"
+      ],
+      "consumes": [
+        "user_query",
+        "knowledge_domain"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "knowledge-retrieval",
+      "timeout_ms": 3000
+    },
+    "effects": {
+      "type": "read",
+      "resources": [
+        "knowledge_index"
+      ]
+    },
+    "idempotent": true,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 1200,
+      "availability": "99.9%"
+    },
+    "cost": {
+      "level": "low"
+    },
+    "quality": {
+      "score": 0.88,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/knowledge_retrieval/capability.json",
+    "checksum": "sha256:36e5054bb9901bfc562c955f57fdd3d1b5d6f1786d772993cd43a887ebec63b0"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

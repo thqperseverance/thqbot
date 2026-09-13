@@ -1,0 +1,115 @@
+{
+  "name": "knowledge.retrieve",
+  "description": "Retrieve relevant passages from the configured knowledge base and return a grounded Chinese answer.",
+  "version": "1.0.0",
+  "namespace": "knowledge",
+  "category": "atomic",
+  "tags": [
+    "knowledge",
+    "retrieval",
+    "rag"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "query": {
+        "type": "string",
+        "description": "The user's question or retrieval query."
+      },
+      "domain": {
+        "type": "string",
+        "description": "Optional knowledge-base name or domain override."
+      }
+    },
+    "required": [
+      "query"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "data": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "hit_count": {
+            "type": "integer"
+          },
+          "answer": {
+            "type": "string"
+          },
+          "passages": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "knowledge_answer",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `knowledge_answer`."
+      },
+      {
+        "name": "knowledge_hits",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `knowledge_hits`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "user_query",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `user_query`."
+      },
+      {
+        "name": "knowledge_domain",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `knowledge_domain`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "knowledge-retrieval",
+    "timeout_ms": 3000
+  },
+  "effects": {
+    "type": "read",
+    "resources": [
+      "knowledge_index"
+    ]
+  },
+  "idempotent": true,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 1200,
+    "availability": "99.9%"
+  },
+  "cost": {
+    "level": "low"
+  },
+  "quality": {
+    "score": 0.88,
+    "source": "manual"
+  }
+}

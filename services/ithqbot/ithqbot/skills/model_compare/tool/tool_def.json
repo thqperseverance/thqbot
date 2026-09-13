@@ -1,0 +1,65 @@
+{
+  "name": "model_compare",
+  "description": "Compare outputs from multiple providers through test-eval.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "prompt": {
+        "type": "string"
+      },
+      "providers": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "criteria": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "prompt",
+      "providers"
+    ]
+  },
+  "version": "1.0.0",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "comparison": {
+        "type": "string"
+      },
+      "provider_results": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "model_comparison",
+      "evaluation_summary"
+    ],
+    "consumes": [
+      "prompt_text",
+      "model_provider_list"
+    ]
+  }
+}

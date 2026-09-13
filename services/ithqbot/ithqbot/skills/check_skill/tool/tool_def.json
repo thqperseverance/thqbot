@@ -1,0 +1,48 @@
+{
+  "name": "check_skill",
+  "description": "Check whether a skill directory complies with SKILL_STANDARDS.md and return a PASS/WARN/FAIL report.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "skill_name": {
+        "type": "string",
+        "description": "Target skill directory name under ithqbot/skills. Optional when bundle_path is provided."
+      },
+      "strict": {
+        "type": "boolean",
+        "description": "If true, treat recommended checks as blocking failures.",
+        "default": false
+      },
+      "bundle_path": {
+        "type": "string",
+        "description": "Path to a packaged skill archive (.zip/.tar/.tar.gz/.tgz/.tar.bz2/.tbz2/.tar.xz/.txz)."
+      }
+    },
+    "required": []
+  },
+  "version": "1.0.0",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "report": {
+        "type": "string"
+      },
+      "result_level": {
+        "type": "string"
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "compliance_report",
+      "fix_plan"
+    ],
+    "consumes": [
+      "skill_name",
+      "bundle_archive"
+    ]
+  }
+}

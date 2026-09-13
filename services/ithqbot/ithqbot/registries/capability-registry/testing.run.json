@@ -1,0 +1,58 @@
+{
+  "name": "testing.run",
+  "plugin": "test_runner",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "testing.run",
+    "description": "Run one dataset or a suite of datasets through test-orchestrator.",
+    "version": "1.0.0",
+    "namespace": "testing",
+    "category": "atomic",
+    "tags": [
+      "testing",
+      "execution",
+      "datasets"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "test_run_result",
+        "evaluation_report"
+      ],
+      "consumes": [
+        "run_action",
+        "dataset_reference"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "test-runner",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "external",
+      "resources": [
+        "test_orchestrator_service"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 4000,
+      "availability": "99.5%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.9,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/test_runner/capability.json",
+    "checksum": "sha256:54226ab7509b7c11594102abc4a6f0bdcd9ea2060ee82c1bff2f8cfcb357447b"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

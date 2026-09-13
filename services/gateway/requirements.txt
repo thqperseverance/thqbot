@@ -1,0 +1,18 @@
+# Gateway 依赖。约束刻意放宽并与 services/ithqbot 对齐，避免在共享虚拟环境中
+# 把 fastapi/starlette/redis 等公共依赖降级或升级（那会破坏 ithqbot）。
+fastapi>=0.116.0,<1.0.0
+uvicorn[standard]>=0.35.0,<1.0.0
+python-multipart>=0.0.20,<1.0.0
+SQLAlchemy>=2.0.36,<3.0.0
+psycopg[binary]>=3.2.0,<4.0.0
+alembic>=1.14.0,<2.0.0
+redis>=6.0.0,<7.0.0
+aiokafka>=0.12.0,<1.0.0
+boto3>=1.35.0,<2.0.0
+minio>=7.2.0,<8.0.0
+pydantic>=2.12.0,<3.0.0
+pydantic-settings>=2.12.0,<3.0.0
+itsdangerous>=2.2.0,<3.0.0
+httpx>=0.28.0,<1.0.0
+loguru>=0.7.3,<1.0.0
+pytest>=8.3.0,<10.0.0

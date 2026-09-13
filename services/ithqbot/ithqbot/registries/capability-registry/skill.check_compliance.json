@@ -1,0 +1,58 @@
+{
+  "name": "skill.check_compliance",
+  "plugin": "check_skill",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "skill.check_compliance",
+    "description": "Check whether a skill directory complies with SKILL_STANDARDS.md and return a PASS/WARN/FAIL report.",
+    "version": "1.0.0",
+    "namespace": "skill",
+    "category": "atomic",
+    "tags": [
+      "skill",
+      "compliance",
+      "audit"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "compliance_report",
+        "fix_plan"
+      ],
+      "consumes": [
+        "skill_name",
+        "bundle_archive"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "check-skill",
+      "timeout_ms": 10000
+    },
+    "effects": {
+      "type": "read",
+      "resources": [
+        "skill_workspace"
+      ]
+    },
+    "idempotent": true,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 3000,
+      "availability": "99.5%"
+    },
+    "cost": {
+      "level": "low"
+    },
+    "quality": {
+      "score": 0.93,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/check_skill/capability.json",
+    "checksum": "sha256:fa3e4b070f6a6868c7b83f618b7111b240c856289c469228f3bc63074e6c6779"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1600" viewBox="0 0 1200 1600" role="img" aria-label="thqbot 宣传海报 — 开源 Agent 平台底座">
+  <style>
+    text { font-family: Inter, "Segoe UI", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; }
+    .mono { font-family: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, "Liberation Mono", Menlo, monospace; }
+  </style>
+  <defs>
+    <radialGradient id="g-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#679EFE" stop-opacity="0.20"/>
+      <stop offset="0.55" stop-color="#679EFE" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#679EFE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="g-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8FBAFF"/>
+      <stop offset="0.5" stop-color="#679EFE"/>
+      <stop offset="1" stop-color="#3F6FE0"/>
+    </linearGradient>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#679EFE"/>
+    </marker>
+    <marker id="arm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#8A8A98"/>
+    </marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#22C55E"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="1600" fill="#0F0F11"/>
+  <ellipse cx="120" cy="60" rx="700" ry="560" fill="url(#g-glow)"/>
+  <ellipse cx="1160" cy="1580" rx="560" ry="440" fill="url(#g-glow)" opacity="0.65"/>
+  <rect x="0" y="0" width="1200" height="4" rx="0" fill="#679EFE"/>
+  <g transform="translate(88 84) scale(1)"><rect width="64" height="64" rx="18" fill="url(#g-accent)"/><path d="M17 23 H47" stroke="#0F0F11" stroke-width="7.5" stroke-linecap="round"/><path d="M32 23 V42" stroke="#0F0F11" stroke-width="7.5" stroke-linecap="round"/><circle cx="46.5" cy="45" r="5.2" fill="#0F0F11"/></g>
+  <text x="170" y="132" font-size="44" font-weight="700" fill="#EAEAEF" id="t1">thqbot</text>
+  <rect x="925.68" y="98" width="186.32" height="36" rx="18" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="1018.84" y="121" font-size="14" font-weight="400" fill="#8A8A98" text-anchor="middle" id="t2">Apache-2.0 · 开源核心</text>
+  <text x="88" y="250" font-size="14" font-weight="600" fill="#679EFE" letter-spacing="4.2" id="t3">AGENT PLATFORM KIT</text>
+  <text x="88" y="348" font-size="68" font-weight="700" fill="#EAEAEF" id="t4">开源 Agent 平台底座</text>
+  <text x="88" y="414" font-size="22" font-weight="400" fill="#8A8A98" id="t5">Web 多轮对话 · 技能即插即用 · Kafka 异步编排</text>
+  <text x="88" y="452" font-size="22" font-weight="400" fill="#8A8A98" id="t6">PostgreSQL 事实来源 · Redis 实时推送 · MinIO 附件直通</text>
+  <line x1="88" y1="516" x2="1112" y2="516" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="88" y="570" font-size="13" font-weight="600" fill="#6C6C7A" letter-spacing="3" id="t7">架构一览</text>
+  <rect x="88" y="590" width="1024" height="340" rx="16" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="120" y="624" width="160" height="96" rx="12" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="136" y="640" width="24" height="24" rx="6.72" fill="rgba(103,158,254,0.14)"/>
+  <circle cx="148" cy="652" r="3.84" fill="#679EFE"/>
+  <text x="136" y="682" font-size="14" font-weight="600" fill="#EAEAEF" id="t8">浏览器</text>
+  <text x="136" y="702" font-size="11" font-weight="400" fill="#8A8A98" id="t9">React 18 + SSE</text>
+  <line x1="287" y1="672" x2="311" y2="672" stroke="rgba(103,158,254,0.45)" stroke-width="1.6" marker-end="url(#ar)"/>
+  <rect x="318" y="624" width="160" height="96" rx="12" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="334" y="640" width="24" height="24" rx="6.72" fill="rgba(103,158,254,0.14)"/>
+  <rect x="340.72" y="646.72" width="4.32" height="4.32" rx="2" fill="#679EFE"/>
+  <rect x="346.96" y="646.72" width="4.32" height="4.32" rx="2" fill="#679EFE"/>
+  <rect x="340.72" y="652.96" width="4.32" height="4.32" rx="2" fill="#679EFE"/>
+  <rect x="346.96" y="652.96" width="4.32" height="4.32" rx="2" fill="#679EFE"/>
+  <text x="334" y="682" font-size="14" font-weight="600" fill="#EAEAEF" id="t10">网关 BFF</text>
+  <text x="334" y="702" font-size="11" font-weight="400" fill="#8A8A98" id="t11">登录 · 会话 · SSE</text>
+  <line x1="485" y1="672" x2="509" y2="672" stroke="rgba(103,158,254,0.45)" stroke-width="1.6" marker-end="url(#ar)"/>
+  <rect x="516" y="624" width="160" height="96" rx="12" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="532" y="640" width="24" height="24" rx="6.72" fill="rgba(103,158,254,0.14)"/>
+  <rect x="538.72" y="648.16" width="10.56" height="2.4" rx="1.2" fill="#679EFE"/>
+  <rect x="538.72" y="652" width="7.2" height="2.4" rx="1.2" fill="#679EFE"/>
+  <rect x="538.72" y="655.84" width="9.12" height="2.4" rx="1.2" fill="#679EFE"/>
+  <text x="532" y="682" font-size="14" font-weight="600" fill="#EAEAEF" id="t12">Kafka</text>
+  <text x="532" y="702" font-size="11" font-weight="400" fill="#8A8A98" id="t13">信封 v1.2 · 3 分区</text>
+  <line x1="683" y1="672" x2="707" y2="672" stroke="rgba(103,158,254,0.45)" stroke-width="1.6" marker-end="url(#ar)"/>
+  <rect x="714" y="624" width="160" height="96" rx="12" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="730" y="640" width="24" height="24" rx="6.72" fill="rgba(103,158,254,0.14)"/>
+  <path d="M744.4 645.28 L738.16 652.72 L741.76 652.72 L739.6 658.72 L746.08 651.04 L742.24 651.04 Z" fill="#679EFE" stroke="#679EFE" stroke-width="1"/>
+  <text x="730" y="682" font-size="14" font-weight="600" fill="#EAEAEF" id="t14">Agent 运行时</text>
+  <text x="730" y="702" font-size="11" font-weight="400" fill="#8A8A98" id="t15">循环 · 技能 · LLM</text>
+  <line x1="881" y1="672" x2="905" y2="672" stroke="rgba(103,158,254,0.45)" stroke-width="1.6" marker-end="url(#ar)"/>
+  <rect x="912" y="624" width="160" height="96" rx="12" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="928" y="640" width="24" height="24" rx="6.72" fill="rgba(103,158,254,0.14)"/>
+  <circle cx="940" cy="652" r="5.28" fill="none" stroke="#679EFE" stroke-width="2"/>
+  <text x="928" y="682" font-size="14" font-weight="600" fill="#EAEAEF" id="t16">技能与工具</text>
+  <text x="928" y="702" font-size="11" font-weight="400" fill="#8A8A98" id="t17">text_stats · 文件</text>
+  <text x="120" y="758" font-size="12" font-weight="600" fill="#6C6C7A" letter-spacing="1.6" id="t18">状态与数据</text>
+  <rect x="144" y="776" width="288" height="54" rx="10" fill="#26262E" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="162" y="801" font-size="13" font-weight="600" fill="#EAEAEF" id="t19">PostgreSQL</text>
+  <text x="162" y="820" font-size="11" font-weight="400" fill="#8A8A98" id="t20">唯一事实来源</text>
+  <rect x="456" y="776" width="288" height="54" rx="10" fill="#26262E" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="474" y="801" font-size="13" font-weight="600" fill="#EAEAEF" id="t21">Redis</text>
+  <text x="474" y="820" font-size="11" font-weight="400" fill="#8A8A98" id="t22">实时推送 · 缓存 · 锁</text>
+  <rect x="768" y="776" width="288" height="54" rx="10" fill="#26262E" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="786" y="801" font-size="13" font-weight="600" fill="#EAEAEF" id="t23">MinIO</text>
+  <text x="786" y="820" font-size="11" font-weight="400" fill="#8A8A98" id="t24">附件直通技能</text>
+  <text x="600" y="908" font-size="13" font-weight="400" fill="#8A8A98" text-anchor="middle" class="mono" id="t25">信封契约 v1.2 · 分区键 tenant|bot|account|chat · 出站消费幂等</text>
+  <text x="88" y="990" font-size="13" font-weight="600" fill="#6C6C7A" letter-spacing="3" id="t26">开箱即得</text>
+  <rect x="88" y="1014" width="326" height="132" rx="12" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="108" y="1034" width="30" height="30" rx="8.4" fill="rgba(103,158,254,0.14)"/>
+  <rect x="116.4" y="1042.4" width="5.4" height="5.4" rx="2" fill="#679EFE"/>
+  <rect x="124.2" y="1042.4" width="5.4" height="5.4" rx="2" fill="#679EFE"/>
+  <rect x="116.4" y="1050.2" width="5.4" height="5.4" rx="2" fill="#679EFE"/>
+  <rect x="124.2" y="1050.2" width="5.4" height="5.4" rx="2" fill="#679EFE"/>
+  <text x="150" y="1054.4" font-size="16" font-weight="600" fill="#EAEAEF" id="t27">单一后端 BFF</text>
+  <text x="108" y="1086.4" font-size="13" font-weight="400" fill="#8A8A98" id="t28">登录 · 会话 · SSE · 静态托管</text>
+  <text x="108" y="1106.4" font-size="13" font-weight="400" fill="#8A8A98" id="t29">一个进程跑完整个后端</text>
+  <rect x="437" y="1014" width="326" height="132" rx="12" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="457" y="1034" width="30" height="30" rx="8.4" fill="rgba(103,158,254,0.14)"/>
+  <path d="M475 1040.6 L467.2 1049.9 L471.7 1049.9 L469 1057.4 L477.1 1047.8 L472.3 1047.8 Z" fill="#679EFE" stroke="#679EFE" stroke-width="1"/>
+  <text x="499" y="1054.4" font-size="16" font-weight="600" fill="#EAEAEF" id="t30">Kafka 异步编排</text>
+  <text x="457" y="1086.4" font-size="13" font-weight="400" fill="#8A8A98" id="t31">与 agent 运行时彻底解耦</text>
+  <text x="457" y="1106.4" font-size="13" font-weight="400" fill="#8A8A98" id="t32">出站消费幂等，重启不丢回复</text>
+  <rect x="786" y="1014" width="326" height="132" rx="12" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="806" y="1034" width="30" height="30" rx="8.4" fill="rgba(103,158,254,0.14)"/>
+  <rect x="814.4" y="1044.2" width="13.2" height="2.4" rx="1.2" fill="#679EFE"/>
+  <rect x="814.4" y="1049" width="9" height="2.4" rx="1.2" fill="#679EFE"/>
+  <rect x="814.4" y="1053.8" width="11.4" height="2.4" rx="1.2" fill="#679EFE"/>
+  <text x="848" y="1054.4" font-size="16" font-weight="600" fill="#EAEAEF" id="t33">技能调用可观测</text>
+  <text x="806" y="1086.4" font-size="13" font-weight="400" fill="#8A8A98" id="t34">阶段推进与技能/工具名实时推送</text>
+  <text x="806" y="1106.4" font-size="13" font-weight="400" fill="#8A8A98" id="t35">落到消息 meta，可复盘</text>
+  <rect x="88" y="1168" width="326" height="132" rx="12" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="108" y="1188" width="30" height="30" rx="8.4" fill="rgba(103,158,254,0.14)"/>
+  <circle cx="123" cy="1203" r="4.8" fill="#679EFE"/>
+  <text x="150" y="1208.4" font-size="16" font-weight="600" fill="#EAEAEF" id="t36">真实用量与耗时</text>
+  <text x="108" y="1240.4" font-size="13" font-weight="400" fill="#8A8A98" id="t37">回合级 token 用量与延迟</text>
+  <text x="108" y="1260.4" font-size="13" font-weight="400" fill="#8A8A98" id="t38">逐消息展示，不是估算</text>
+  <rect x="437" y="1168" width="326" height="132" rx="12" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="457" y="1188" width="30" height="30" rx="8.4" fill="rgba(103,158,254,0.14)"/>
+  <circle cx="472" cy="1203" r="6.6" fill="none" stroke="#679EFE" stroke-width="2"/>
+  <text x="499" y="1208.4" font-size="16" font-weight="600" fill="#EAEAEF" id="t39">附件直通技能</text>
+  <text x="457" y="1240.4" font-size="13" font-weight="400" fill="#8A8A98" id="t40">上传即入 MinIO</text>
+  <text x="457" y="1260.4" font-size="13" font-weight="400" fill="#8A8A98" id="t41">技能用 minio:// 直接读取</text>
+  <rect x="786" y="1168" width="326" height="132" rx="12" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <rect x="806" y="1188" width="30" height="30" rx="8.4" fill="rgba(103,158,254,0.14)"/>
+  <rect x="815.6" y="1201.8" width="10.8" height="7.8" rx="3" fill="#679EFE"/>
+  <path d="M818 1201.8 v-3 a3 3 0 0 1 6 0 v3" fill="none" stroke="#679EFE" stroke-width="2"/>
+  <text x="848" y="1208.4" font-size="16" font-weight="600" fill="#EAEAEF" id="t42">隔离式测试</text>
+  <text x="806" y="1240.4" font-size="13" font-weight="400" fill="#8A8A98" id="t43">106 网关用例 + 35 前端用例</text>
+  <text x="806" y="1260.4" font-size="13" font-weight="400" fill="#8A8A98" id="t44">不依赖数据库与消息队列</text>
+  <line x1="88" y1="1356" x2="1112" y2="1356" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+  <text x="88" y="1402" font-size="16" font-weight="400" fill="#679EFE" class="mono" id="t45">github.com/your-org/thqbot</text>
+  <text x="1112" y="1402" font-size="14" font-weight="400" fill="#8A8A98" text-anchor="end" id="t46">Apache-2.0 · v0.1.0</text>
+  <text x="600" y="1478" font-size="26" font-weight="600" fill="#EAEAEF" text-anchor="middle" id="t47">让每一次技能调用都看得见</text>
+  <line x1="540" y1="1512" x2="660" y2="1512" stroke="rgba(103,158,254,0.45)" stroke-width="2"/>
+  <text x="600" y="1552" font-size="14" font-weight="400" fill="#6C6C7A" text-anchor="middle" id="t48">Web 对话 · 技能编排 · 异步总线 · 可观测轨迹</text>
+</svg>

@@ -1,0 +1,57 @@
+{
+  "name": "content.summarize",
+  "plugin": "summarize",
+  "version": "1.0.0",
+  "status": "active",
+  "capability": {
+    "name": "content.summarize",
+    "description": "Summarize a URL, local file, or YouTube video using the summarize CLI.",
+    "version": "1.0.0",
+    "namespace": "content",
+    "category": "ai",
+    "tags": [
+      "content",
+      "summary",
+      "web"
+    ],
+    "deprecated": false,
+    "semantic": {
+      "produces": [
+        "summary_text",
+        "extracted_content"
+      ],
+      "consumes": [
+        "summary_target"
+      ]
+    },
+    "routing": {
+      "type": "internal",
+      "service": "summarize-cli",
+      "timeout_ms": 180000
+    },
+    "effects": {
+      "type": "external",
+      "resources": [
+        "remote_content"
+      ]
+    },
+    "idempotent": false,
+    "retryable": true,
+    "sla": {
+      "latency_ms": 15000,
+      "availability": "98.0%"
+    },
+    "cost": {
+      "level": "medium"
+    },
+    "quality": {
+      "score": 0.8,
+      "source": "manual"
+    }
+  },
+  "source": {
+    "schema_file": "skills/summarize/capability.json",
+    "checksum": "sha256:fd9cf5b05390cfbea06e56b58f7b77fcf6d67259ddf7361e36bef6479b5c2286"
+  },
+  "updated_at": "2026-04-25T13:15:53Z"
+}

@@ -1,0 +1,110 @@
+{
+  "name": "testing.plan_cases",
+  "description": "Generate test cases through test-eval.",
+  "version": "1.0.0",
+  "namespace": "testing",
+  "category": "ai",
+  "tags": [
+    "testing",
+    "planning",
+    "test_eval"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "objective": {
+        "type": "string"
+      },
+      "target": {
+        "type": "string"
+      },
+      "case_count": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 20
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "objective"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "test_cases": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "test_plan",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `test_plan`."
+      },
+      {
+        "name": "test_cases",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `test_cases`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "test_objective",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `test_objective`."
+      },
+      {
+        "name": "test_target",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `test_target`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "test-planner",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "external",
+    "resources": [
+      "test_eval_service"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 6000,
+    "availability": "99.0%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.81,
+    "source": "manual"
+  }
+}

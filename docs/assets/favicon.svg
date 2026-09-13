@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="thqbot favicon">
+  <style>
+    text { font-family: Inter, "Segoe UI", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; }
+    .mono { font-family: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, "Liberation Mono", Menlo, monospace; }
+  </style>
+  <defs>
+    <radialGradient id="g-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#679EFE" stop-opacity="0.20"/>
+      <stop offset="0.55" stop-color="#679EFE" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#679EFE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="g-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8FBAFF"/>
+      <stop offset="0.5" stop-color="#679EFE"/>
+      <stop offset="1" stop-color="#3F6FE0"/>
+    </linearGradient>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#679EFE"/>
+    </marker>
+    <marker id="arm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#8A8A98"/>
+    </marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#22C55E"/>
+    </marker>
+  </defs>
+  <rect width="64" height="64" fill="none"/>
+  <g transform="translate(0 0) scale(1)"><rect width="64" height="64" rx="18" fill="url(#g-accent)"/><path d="M17 23 H47" stroke="#0F0F11" stroke-width="7.5" stroke-linecap="round"/><path d="M32 23 V42" stroke="#0F0F11" stroke-width="7.5" stroke-linecap="round"/><circle cx="46.5" cy="45" r="5.2" fill="#0F0F11"/></g>
+</svg>

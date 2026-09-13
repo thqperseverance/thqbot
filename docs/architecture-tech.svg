@@ -1,0 +1,159 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1120" viewBox="0 0 1600 1120" role="img" aria-label="thqbot 技术架构图">
+  <style>
+    text { font-family: Inter, "Segoe UI", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif; }
+    .mono { font-family: "SF Mono", "JetBrains Mono", "Fira Code", Consolas, "Liberation Mono", Menlo, monospace; }
+  </style>
+  <defs>
+    <radialGradient id="g-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#679EFE" stop-opacity="0.20"/>
+      <stop offset="0.55" stop-color="#679EFE" stop-opacity="0.06"/>
+      <stop offset="1" stop-color="#679EFE" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="g-accent" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8FBAFF"/>
+      <stop offset="0.5" stop-color="#679EFE"/>
+      <stop offset="1" stop-color="#3F6FE0"/>
+    </linearGradient>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#679EFE"/>
+    </marker>
+    <marker id="arm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#8A8A98"/>
+    </marker>
+    <marker id="arg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 1.6 L9 5 L0 8.4 z" fill="#22C55E"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="1120" fill="#0F0F11"/>
+  <ellipse cx="100" cy="40" rx="700" ry="420" fill="url(#g-glow)"/>
+  <rect x="0" y="0" width="1600" height="4" rx="0" fill="#679EFE"/>
+  <text x="80" y="96" font-size="30" font-weight="700" fill="#EAEAEF" id="t1">thqbot 技术架构</text>
+  <text x="80" y="126" font-size="14" font-weight="400" fill="#8A8A98" id="t2">真实组件、协议与数据流 —— 与仓库里跑的这套完全一致</text>
+  <rect x="80" y="140" width="860" height="124" rx="14" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="102" y="174" font-size="15" font-weight="600" fill="#EAEAEF" id="t3">① 客户端</text>
+  <text x="918" y="174" font-size="12" font-weight="400" fill="#8A8A98" text-anchor="end" class="mono" id="t4">browser</text>
+  <rect x="102" y="196" width="380" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="116" y="219" font-size="13" font-weight="600" fill="#EAEAEF" id="t5">React 18 + Vite 6 工作台</text>
+  <text x="116" y="239" font-size="11" font-weight="400" fill="#8A8A98" id="t6">无第三方 UI 库 · 自托管 Inter</text>
+  <rect x="502" y="196" width="416" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="516" y="219" font-size="13" font-weight="600" fill="#EAEAEF" id="t7">传输</text>
+  <text x="516" y="239" font-size="11" font-weight="400" fill="#8A8A98" id="t8">同源 Cookie 鉴权 · SSE 事件流 · REST</text>
+  <rect x="80" y="284" width="860" height="228" rx="14" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="102" y="318" font-size="15" font-weight="600" fill="#EAEAEF" id="t9">② 网关 BFF（FastAPI + uvicorn）</text>
+  <text x="918" y="318" font-size="12" font-weight="400" fill="#8A8A98" text-anchor="end" class="mono" id="t10">python 3.11</text>
+  <rect x="102" y="330" width="152" height="66" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="116" y="358" font-size="13" font-weight="600" fill="#EAEAEF" id="t11">auth</text>
+  <text x="116" y="378" font-size="11" font-weight="400" fill="#8A8A98" id="t12">PBKDF2 + 签名 Cookie</text>
+  <rect x="268" y="330" width="152" height="66" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="282" y="358" font-size="13" font-weight="600" fill="#EAEAEF" id="t13">chat API</text>
+  <text x="282" y="378" font-size="11" font-weight="400" fill="#8A8A98" id="t14">会话 / 消息 / 配置</text>
+  <rect x="434" y="330" width="152" height="66" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="448" y="358" font-size="13" font-weight="600" fill="#EAEAEF" id="t15">files API</text>
+  <text x="448" y="378" font-size="11" font-weight="400" fill="#8A8A98" id="t16">上传 · 下载鉴权</text>
+  <rect x="600" y="330" width="152" height="66" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="614" y="358" font-size="13" font-weight="600" fill="#EAEAEF" id="t17">SSE stream</text>
+  <text x="614" y="378" font-size="11" font-weight="400" fill="#8A8A98" id="t18">Redis Pub/Sub 扇出</text>
+  <rect x="766" y="330" width="152" height="66" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="780" y="358" font-size="13" font-weight="600" fill="#EAEAEF" id="t19">orchestrator</text>
+  <text x="780" y="378" font-size="11" font-weight="400" fill="#8A8A98" id="t20">信封构造 · 出站消费</text>
+  <rect x="102" y="414" width="300" height="58" rx="10" fill="#202027" stroke="rgba(103,158,254,0.45)" stroke-width="1"/>
+  <text x="116" y="438" font-size="13" font-weight="600" fill="#679EFE" id="t21">repository + Alembic</text>
+  <text x="116" y="458" font-size="11" font-weight="400" fill="#8A8A98" id="t22">SQLAlchemy · schema 由迁移拥有</text>
+  <rect x="418" y="414" width="300" height="58" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="432" y="438" font-size="13" font-weight="600" fill="#EAEAEF" id="t23">realtime</text>
+  <text x="432" y="458" font-size="11" font-weight="400" fill="#8A8A98" id="t24">去重 · 状态缓存 · 分布式锁</text>
+  <rect x="734" y="414" width="184" height="58" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="748" y="438" font-size="13" font-weight="600" fill="#EAEAEF" id="t25">object_store</text>
+  <text x="748" y="458" font-size="11" font-weight="400" fill="#8A8A98" id="t26">S3 兼容 · 取流 / 删除</text>
+  <rect x="80" y="532" width="860" height="124" rx="14" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="102" y="566" font-size="15" font-weight="600" fill="#EAEAEF" id="t27">③ 消息骨干</text>
+  <text x="918" y="566" font-size="12" font-weight="400" fill="#8A8A98" text-anchor="end" class="mono" id="t28">Kafka 3.9 · KRaft</text>
+  <rect x="102" y="588" width="380" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="116" y="611" font-size="13" font-weight="600" fill="#EAEAEF" id="t29">icatmsg_inbound</text>
+  <text x="116" y="631" font-size="11" font-weight="400" fill="#8A8A98" id="t30">分区键 tenant|bot|account|chat</text>
+  <rect x="502" y="588" width="200" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="516" y="611" font-size="13" font-weight="600" fill="#EAEAEF" id="t31">icatmsg_outbound</text>
+  <text x="516" y="631" font-size="11" font-weight="400" fill="#8A8A98" id="t32">3 分区</text>
+  <rect x="718" y="588" width="200" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="732" y="611" font-size="13" font-weight="600" fill="#EAEAEF" id="t33">消费组</text>
+  <text x="732" y="631" font-size="11" font-weight="400" fill="#8A8A98" id="t34">thqbot-gateway</text>
+  <rect x="80" y="676" width="860" height="184" rx="14" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="102" y="710" font-size="15" font-weight="600" fill="#EAEAEF" id="t35">④ Agent 运行时</text>
+  <text x="918" y="710" font-size="12" font-weight="400" fill="#8A8A98" text-anchor="end" class="mono" id="t36">ithqbot 0.1.4</text>
+  <rect x="102" y="722" width="152" height="62" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="116" y="748" font-size="13" font-weight="600" fill="#EAEAEF" id="t37">AgentLoop</text>
+  <text x="116" y="768" font-size="11" font-weight="400" fill="#8A8A98" id="t38">推理 · 工具循环</text>
+  <rect x="268" y="722" width="152" height="62" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="282" y="748" font-size="13" font-weight="600" fill="#EAEAEF" id="t39">技能加载</text>
+  <text x="282" y="768" font-size="11" font-weight="400" fill="#8A8A98" id="t40">SKILL.md 规范</text>
+  <rect x="434" y="722" width="152" height="62" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="448" y="748" font-size="13" font-weight="600" fill="#EAEAEF" id="t41">工具注册</text>
+  <text x="448" y="768" font-size="11" font-weight="400" fill="#8A8A98" id="t42">沙箱 roots</text>
+  <rect x="600" y="722" width="152" height="62" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="614" y="748" font-size="13" font-weight="600" fill="#EAEAEF" id="t43">LLM Provider</text>
+  <text x="614" y="768" font-size="11" font-weight="400" fill="#8A8A98" id="t44">OpenAI 兼容</text>
+  <rect x="766" y="722" width="152" height="62" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="780" y="748" font-size="13" font-weight="600" fill="#EAEAEF" id="t45">会话 / 记忆</text>
+  <text x="780" y="768" font-size="11" font-weight="400" fill="#8A8A98" id="t46">PG + 文件工作区</text>
+  <rect x="102" y="800" width="380" height="44" rx="10" fill="#26262E" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="116" y="826.5" font-size="13" font-weight="600" fill="#EAEAEF" id="t47">内置技能：text_stats · doc_compare · check_skill</text>
+  <rect x="502" y="800" width="416" height="44" rx="10" fill="#26262E" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="516" y="826.5" font-size="13" font-weight="600" fill="#EAEAEF" id="t48">read_file 沙箱：工作区 + 内置技能目录，越界即拒</text>
+  <rect x="80" y="880" width="860" height="124" rx="14" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="102" y="914" font-size="15" font-weight="600" fill="#EAEAEF" id="t49">⑤ 数据与存储</text>
+  <text x="918" y="914" font-size="12" font-weight="400" fill="#8A8A98" text-anchor="end" class="mono" id="t50">stateful</text>
+  <rect x="102" y="932" width="262" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="116" y="955" font-size="13" font-weight="600" fill="#EAEAEF" id="t51">PostgreSQL</text>
+  <text x="116" y="975" font-size="11" font-weight="400" fill="#8A8A98" id="t52">唯一事实来源</text>
+  <rect x="380" y="932" width="262" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="394" y="955" font-size="13" font-weight="600" fill="#EAEAEF" id="t53">Redis</text>
+  <text x="394" y="975" font-size="11" font-weight="400" fill="#8A8A98" id="t54">缓存 / 推送 / 锁</text>
+  <rect x="658" y="932" width="260" height="56" rx="10" fill="#202027" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="672" y="955" font-size="13" font-weight="600" fill="#EAEAEF" id="t55">MinIO</text>
+  <text x="672" y="975" font-size="11" font-weight="400" fill="#8A8A98" id="t56">桶 ithqbot-storage</text>
+  <line x1="510" y1="268" x2="510" y2="280" stroke="rgba(103,158,254,0.45)" stroke-width="1.4" marker-end="url(#ar)"/>
+  <line x1="510" y1="516" x2="510" y2="528" stroke="rgba(103,158,254,0.45)" stroke-width="1.4" marker-end="url(#ar)"/>
+  <line x1="510" y1="660" x2="510" y2="672" stroke="rgba(103,158,254,0.45)" stroke-width="1.4" marker-end="url(#ar)"/>
+  <line x1="510" y1="864" x2="510" y2="876" stroke="rgba(103,158,254,0.45)" stroke-width="1.4" marker-end="url(#ar)"/>
+  <rect x="980" y="140" width="540" height="520" rx="14" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="1004" y="176" font-size="15" font-weight="600" fill="#EAEAEF" id="t57">一条消息的完整旅程</text>
+  <circle cx="1010" cy="210" r="11" fill="#26262E"/>
+  <text x="1010" y="214" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t58">1</text>
+  <text x="1032" y="214" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t59">浏览器 POST /api/conversations/{id}/messages</text>
+  <circle cx="1010" cy="264" r="11" fill="#26262E"/>
+  <text x="1010" y="268" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t60">2</text>
+  <text x="1032" y="268" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t61">网关注入 user 行 → 组装信封 v1.2 → 投递 inbound</text>
+  <circle cx="1010" cy="318" r="11" fill="#26262E"/>
+  <text x="1010" y="322" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t62">3</text>
+  <text x="1032" y="322" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t63">ithqbot 消费 → AgentLoop 推理 → 调技能 / 工具</text>
+  <circle cx="1010" cy="372" r="11" fill="#26262E"/>
+  <text x="1010" y="376" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t64">4</text>
+  <text x="1032" y="376" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t65">每步 emit_progress → 回推 status.processing 事件</text>
+  <circle cx="1010" cy="426" r="11" fill="#26262E"/>
+  <text x="1010" y="430" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t66">5</text>
+  <text x="1032" y="430" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t67">网关把进度并入 Redis 状态缓存（跨事件做并集）</text>
+  <circle cx="1010" cy="480" r="11" fill="#26262E"/>
+  <text x="1010" y="484" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t68">6</text>
+  <text x="1032" y="484" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t69">回复落 PG → Redis Pub/Sub → SSE 推到浏览器</text>
+  <circle cx="1010" cy="534" r="11" fill="#26262E"/>
+  <text x="1010" y="538" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t70">7</text>
+  <text x="1032" y="538" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t71">前端按 SSE 事件累积出「轨迹」时间线</text>
+  <circle cx="1010" cy="588" r="11" fill="#26262E"/>
+  <text x="1010" y="592" font-size="12" font-weight="600" fill="#679EFE" text-anchor="middle" id="t72">8</text>
+  <text x="1032" y="592" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t73">回合结束写回 usage 与 latency_ms 到消息 meta</text>
+  <rect x="980" y="684" width="540" height="320" rx="14" fill="#1A1A1F" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+  <text x="1004" y="720" font-size="15" font-weight="600" fill="#EAEAEF" id="t74">关键设计决策</text>
+  <circle cx="1010" cy="756" r="3.4" fill="#679EFE"/>
+  <text x="1024" y="760" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t75">PostgreSQL 是唯一事实来源；Redis 只做缓存 / 通道 / 锁</text>
+  <circle cx="1010" cy="796" r="3.4" fill="#679EFE"/>
+  <text x="1024" y="800" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t76">前后端通过 Kafka 解耦，出站消费按 external_id 幂等</text>
+  <circle cx="1010" cy="836" r="3.4" fill="#679EFE"/>
+  <text x="1024" y="840" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t77">schema 由 Alembic 拥有，不靠 ORM 隐式建表</text>
+  <circle cx="1010" cy="876" r="3.4" fill="#679EFE"/>
+  <text x="1024" y="880" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t78">技能产出文件走同一 MinIO 桶，键含 user_id 做隔离</text>
+  <circle cx="1010" cy="916" r="3.4" fill="#679EFE"/>
+  <text x="1024" y="920" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t79">进度元数据跨事件做并集，避免 finalizing 抹掉技能名</text>
+  <circle cx="1010" cy="956" r="3.4" fill="#679EFE"/>
+  <text x="1024" y="960" font-size="12.5" font-weight="400" fill="#EAEAEF" id="t80">附件下载按 PG 记录校验归属，越权一律 404</text>
+  <text x="80" y="1092" font-size="12" font-weight="400" fill="#8A8A98" class="mono" id="t81">端口：网关 8080（宿主 8090）· worker 健康检查 9002 · Kafka 9092（宿主 29092）· MinIO 9000</text>
+</svg>

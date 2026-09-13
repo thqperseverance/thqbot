@@ -1,0 +1,482 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ithqbot.local/schemas/capability.schema.json",
+  "title": "ithqbot Capability Schema",
+  "description": "Standard schema for capability declarations used by Skills, Planner, and Plugin runtime.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "name",
+    "description",
+    "version",
+    "namespace",
+    "input_schema",
+    "output_schema",
+    "semantic",
+    "routing"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Globally unique capability identifier. Format: <namespace>.<action>.",
+      "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)$"
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Human-readable capability description."
+    },
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the capability contract.",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "namespace": {
+      "type": "string",
+      "description": "Business domain namespace of the capability.",
+      "pattern": "^[a-z][a-z0-9_]*$"
+    },
+    "category": {
+      "type": "string",
+      "description": "Capability category used for planner and runtime reasoning.",
+      "enum": ["atomic", "composite", "ai"]
+    },
+    "tags": {
+      "type": "array",
+      "description": "Search and discovery tags for registry, planner, and UI.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_:-]*$"
+      },
+      "uniqueItems": true
+    },
+    "deprecated": {
+      "type": "boolean",
+      "description": "Whether this capability is deprecated and should not be selected by default.",
+      "default": false
+    },
+    "input_schema": {
+      "$ref": "#/$defs/json_schema_object"
+    },
+    "output_schema": {
+      "$ref": "#/$defs/json_schema_object"
+    },
+    "semantic": {
+      "$ref": "#/$defs/semantic"
+    },
+    "routing": {
+      "$ref": "#/$defs/routing"
+    },
+    "dependencies": {
+      "type": "array",
+      "description": "Upstream capabilities required by a composite or orchestration-oriented capability.",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_]*(\\.[a-z][a-z0-9_]*)$"
+      },
+      "uniqueItems": true
+    },
+    "auth": {
+      "$ref": "#/$defs/auth"
+    },
+    "sla": {
+      "$ref": "#/$defs/sla"
+    },
+    "cost": {
+      "$ref": "#/$defs/cost"
+    },
+    "effects": {
+      "$ref": "#/$defs/effects"
+    },
+    "quality": {
+      "$ref": "#/$defs/quality"
+    },
+    "idempotent": {
+      "type": "boolean",
+      "description": "Whether repeated calls with the same input are semantically safe."
+    },
+    "retryable": {
+      "type": "boolean",
+      "description": "Whether runtime may automatically retry on transient failures."
+    },
+    "examples": {
+      "type": "array",
+      "description": "Optional usage examples for humans or tooling.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "input": {
+            "type": "object"
+          },
+          "output": {
+            "type": "object"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "json_schema_object": {
+      "type": "object",
+      "description": "Embedded JSON Schema object.",
+      "properties": {
+        "$ref": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "object"
+        },
+        "required": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enum": {
+          "type": "array"
+        },
+        "items": {},
+        "default": {},
+        "examples": {
+          "type": "array"
+        },
+        "description": {
+          "type": "string"
+        },
+        "oneOf": {
+          "type": "array"
+        },
+        "anyOf": {
+          "type": "array"
+        },
+        "allOf": {
+          "type": "array"
+        },
+        "additionalProperties": {
+          "oneOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "object"
+            }
+          ]
+        }
+      },
+      "required": ["type"],
+      "additionalProperties": true
+    },
+    "semantic": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["produces", "consumes"],
+      "properties": {
+        "produces": {
+          "type": "array",
+          "description": "Typed output semantic declarations.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semantic_produce"
+          }
+        },
+        "consumes": {
+          "type": "array",
+          "description": "Typed input semantic declarations.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/semantic_consume"
+          }
+        }
+      }
+    },
+    "semantic_produce": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "schema_ref": {
+          "type": "string",
+          "description": "Reference to the relevant structure, usually #/output_schema or a nested path."
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "semantic_consume": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_]*$"
+        },
+        "source": {
+          "type": "string",
+          "description": "Where the semantic input comes from, for example input.user_id or context.tenant_id."
+        },
+        "schema_ref": {
+          "type": "string",
+          "description": "Optional reference to an input structure, usually #/input_schema or a nested path."
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "routing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["http", "mcp", "internal"]
+        },
+        "method": {
+          "type": "string",
+          "description": "HTTP method when routing.type=http."
+        },
+        "service": {
+          "type": "string",
+          "description": "Service discovery key or logical target service name."
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "HTTP endpoint path or internal route path."
+        },
+        "server": {
+          "type": "string",
+          "description": "Target MCP server or internal service identifier."
+        },
+        "tool": {
+          "type": "string",
+          "description": "Target MCP tool or internal function name."
+        },
+        "environment": {
+          "type": "string",
+          "description": "Optional execution environment hint such as dev, test, or prod."
+        },
+        "timeout_ms": {
+          "type": "integer",
+          "minimum": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "http"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["service", "method", "endpoint"]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "mcp"
+              }
+            },
+            "required": ["type"]
+          },
+          "then": {
+            "required": ["server", "tool"]
+          }
+        }
+      ]
+    },
+    "auth": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "boolean"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_:-]*$"
+          }
+        }
+      }
+    },
+    "sla": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "latency_ms": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "availability": {
+          "type": "string",
+          "pattern": "^[0-9]+(\\.[0-9]+)?%$"
+        }
+      }
+    },
+    "cost": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "type": "string",
+          "enum": ["low", "medium", "high"]
+        }
+      }
+    },
+    "effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "resources"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["read", "write", "external"]
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_:-]*$"
+          },
+          "minItems": 1,
+          "uniqueItems": true
+        }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "source"],
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "source": {
+          "type": "string",
+          "enum": ["manual", "metrics", "ai_eval"]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "composite"
+          }
+        },
+        "required": ["category"]
+      },
+      "then": {
+        "required": ["dependencies"],
+        "properties": {
+          "dependencies": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "examples": [
+    {
+      "name": "billing.get_bill",
+      "description": "获取用户账单信息",
+      "version": "1.0.0",
+      "namespace": "billing",
+      "category": "atomic",
+      "tags": ["billing", "finance"],
+      "deprecated": false,
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "examples": ["u_12345"]
+          }
+        },
+        "required": ["user_id"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "amount": {
+            "type": "number"
+          },
+          "items": {
+            "type": "array"
+          }
+        }
+      },
+      "semantic": {
+        "produces": [
+          {
+            "name": "billing_data",
+            "schema_ref": "#/output_schema",
+            "description": "用户账单数据"
+          }
+        ],
+        "consumes": [
+          {
+            "name": "user_id",
+            "source": "input.user_id",
+            "schema_ref": "#/input_schema/properties/user_id",
+            "description": "账单归属用户 ID"
+          }
+        ]
+      },
+      "routing": {
+        "type": "http",
+        "service": "billing-service",
+        "method": "POST",
+        "endpoint": "/get_bill",
+        "environment": "prod",
+        "timeout_ms": 3000
+      },
+      "auth": {
+        "required": true,
+        "roles": ["user", "admin"]
+      },
+      "sla": {
+        "latency_ms": 200,
+        "availability": "99.9%"
+      },
+      "cost": {
+        "level": "low"
+      },
+      "effects": {
+        "type": "read",
+        "resources": ["billing_db"]
+      },
+      "quality": {
+        "score": 0.9,
+        "source": "manual"
+      },
+      "idempotent": true,
+      "retryable": true
+    }
+  ]
+}

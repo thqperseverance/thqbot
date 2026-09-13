@@ -1,0 +1,43 @@
+{
+  "type": "capability",
+  "name": "content.text_stats",
+  "description": "对纯文本做确定性统计：字符/行/段落/词数与高频关键词。",
+  "version": "1.0.0",
+  "namespace": "content",
+  "category": "atomic",
+  "tags": ["text", "stats", "analysis"],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "text": {"type": "string", "description": "待统计的文本。"},
+      "top_n": {"type": "integer", "default": 5}
+    },
+    "required": ["text"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "chars_total": {"type": "integer"},
+      "keywords": {"type": "array"}
+    }
+  },
+  "semantic": {
+    "produces": [
+      {"name": "text_statistics", "schema_ref": "#/output_schema", "description": "文本规模统计"}
+    ],
+    "consumes": [
+      {"name": "plain_text", "source": "input.text", "description": "待统计文本"}
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "ithqbot-skill",
+    "tool": "text_stats"
+  },
+  "effects": {"type": "read", "resources": []},
+  "cost": {"level": "low"},
+  "sla": {"latency_ms": 50},
+  "idempotent": true,
+  "retryable": true
+}

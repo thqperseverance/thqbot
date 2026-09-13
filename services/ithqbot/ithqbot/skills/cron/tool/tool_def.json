@@ -1,0 +1,71 @@
+{
+  "name": "cron",
+  "description": "Create, list, and remove reminders or recurring tasks with interval, cron expression, one-time schedule, and timezone support.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "action": {
+        "type": "string",
+        "description": "Action to perform: add, list, or remove."
+      },
+      "message": {
+        "type": "string",
+        "description": "Reminder text or task description."
+      },
+      "every_seconds": {
+        "type": "integer",
+        "description": "Interval in seconds for repeated execution."
+      },
+      "cron_expr": {
+        "type": "string",
+        "description": "Cron expression used for recurring schedules."
+      },
+      "at": {
+        "type": "string",
+        "description": "ISO datetime for one-time execution."
+      },
+      "tz": {
+        "type": "string",
+        "description": "IANA timezone used with cron_expr."
+      },
+      "job_id": {
+        "type": "string",
+        "description": "Job ID required when action=remove."
+      }
+    },
+    "required": [
+      "action"
+    ]
+  },
+  "version": "1.0.0",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "message": {
+        "type": "string"
+      },
+      "job_id": {
+        "type": "string"
+      },
+      "jobs": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "scheduled_job",
+      "job_list"
+    ],
+    "consumes": [
+      "schedule_request",
+      "job_reference"
+    ]
+  }
+}

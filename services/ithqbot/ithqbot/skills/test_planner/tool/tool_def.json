@@ -1,0 +1,60 @@
+{
+  "name": "test_planner",
+  "description": "Generate test cases through test-eval.",
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "objective": {
+        "type": "string"
+      },
+      "target": {
+        "type": "string"
+      },
+      "case_count": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 20
+      },
+      "gateway_url": {
+        "type": "string"
+      },
+      "cookie": {
+        "type": "string"
+      },
+      "csrf_token": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "objective"
+    ]
+  },
+  "version": "1.0.0",
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "test_cases": {
+        "type": "array",
+        "items": {
+          "type": "object"
+        }
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      "test_plan",
+      "test_cases"
+    ],
+    "consumes": [
+      "test_objective",
+      "test_target"
+    ]
+  }
+}

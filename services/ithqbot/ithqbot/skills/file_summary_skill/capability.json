@@ -1,0 +1,96 @@
+{
+  "name": "document.summarize_file",
+  "description": "Read a file by file_id, summarize it with LLM, then save summary as a new file and return new file_id.",
+  "version": "1.0.0",
+  "namespace": "document",
+  "category": "ai",
+  "tags": [
+    "document",
+    "summary",
+    "file"
+  ],
+  "deprecated": false,
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "file_id": {
+        "type": "string",
+        "description": "Source file id to summarize."
+      },
+      "output_name": {
+        "type": "string",
+        "description": "Optional output filename."
+      },
+      "output_mime": {
+        "type": "string",
+        "description": "Optional output mime type."
+      }
+    },
+    "required": [
+      "file_id"
+    ]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "status": {
+        "type": "string"
+      },
+      "summary": {
+        "type": "string"
+      },
+      "file_id": {
+        "type": "string"
+      },
+      "file_name": {
+        "type": "string"
+      }
+    }
+  },
+  "semantic": {
+    "produces": [
+      {
+        "name": "document_summary",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `document_summary`."
+      },
+      {
+        "name": "saved_file",
+        "schema_ref": "#/output_schema",
+        "description": "Normalized output semantic `saved_file`."
+      }
+    ],
+    "consumes": [
+      {
+        "name": "document_file",
+        "source": "input",
+        "schema_ref": "#/input_schema",
+        "description": "Normalized input semantic `document_file`."
+      }
+    ]
+  },
+  "routing": {
+    "type": "internal",
+    "service": "file-summary",
+    "timeout_ms": 10000
+  },
+  "effects": {
+    "type": "write",
+    "resources": [
+      "object_storage"
+    ]
+  },
+  "idempotent": false,
+  "retryable": true,
+  "sla": {
+    "latency_ms": 8000,
+    "availability": "99.0%"
+  },
+  "cost": {
+    "level": "medium"
+  },
+  "quality": {
+    "score": 0.82,
+    "source": "manual"
+  }
+}
