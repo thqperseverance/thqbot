@@ -203,7 +203,7 @@ thqbot/
 │   ├── social-preview.png        # GitHub 社交预览图（1280x640）
 │   ├── architecture-product.svg  # 产品架构图
 │   ├── architecture-tech.svg     # 技术架构图
-│   └── assets/                   # logo / favicon / 矢量源文件
+│   └── assets/                   # logo / favicon / 矢量源文件 / 素材生成与校验工具链
 ├── services/
 │   ├── gateway/                  # 单应用后端（含前端静态托管）
 │   │   ├── app/                  # config / models / repository / orchestrator / realtime / routes
