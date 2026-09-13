@@ -33,6 +33,7 @@ services:
   postgres:
     image: postgres:16-alpine
     container_name: thqbot-postgres
+    restart: unless-stopped
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-thqbot}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-thqbot_dev_pw}
@@ -52,6 +53,7 @@ services:
   kafka:
     image: apache/kafka:3.9.0
     container_name: thqbot-kafka
+    restart: unless-stopped
     environment:
       CLUSTER_ID: ${KAFKA_CLUSTER_ID:-MkU3OEVBNTcwNTJENDM2Qk}
       KAFKA_NODE_ID: 1
@@ -116,6 +118,7 @@ services:
   minio:
     image: minio/minio:latest
     container_name: thqbot-minio
+    restart: unless-stopped
     command: ["server", "/data", "--console-address", ":9001"]
     environment:
       MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
@@ -138,6 +141,7 @@ services:
       context: ./services/gateway
       args: *build-args
     container_name: thqbot-gateway
+    restart: unless-stopped
     working_dir: /app
     command: ["/bin/sh", "-lc", "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port 8080"]
     environment:
@@ -152,6 +156,10 @@ services:
       APP_AUTH_USERS: ${APP_AUTH_USERS:-}
       APP_AGENT_TENANT_ID: ${APP_AGENT_TENANT_ID:-thqbot}
       APP_AGENT_BOT_ID: ${APP_AGENT_BOT_ID:-bot_A}
+      # 仅用于前端展示（模型下拉 / 权限提示）与 /api/config，真实调用在 worker 侧
+      APP_LLM_MODEL: ${APP_LLM_MODEL:-}
+      APP_LLM_MODELS: ${APP_LLM_MODELS:-}
+      APP_AGENT_WORKSPACE_RESTRICTED: ${APP_AGENT_WORKSPACE_RESTRICTED:-true}
       APP_MINIO_ENDPOINT: ${MINIO_CONTAINER_ENDPOINT:-minio:9000}
       APP_MINIO_ACCESS_KEY: ${MINIO_ROOT_USER:-minioadmin}
       APP_MINIO_SECRET_KEY: ${MINIO_ROOT_PASSWORD:-minioadmin}
@@ -179,6 +187,7 @@ services:
       context: ./services/ithqbot
       args: *build-args
     container_name: thqbot-ithqbot
+    restart: unless-stopped
     working_dir: /workspace
     entrypoint: ["/entrypoint.sh"]
     command:
